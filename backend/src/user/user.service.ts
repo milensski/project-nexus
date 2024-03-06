@@ -16,6 +16,10 @@ export class UserService {
         return bcrypt.compareSync(password, hashedPassword)
       }
 
+    async findAll(): Promise<User[]> {
+        return this.userRepository.find();
+      }
+
     async findByUsername(username:string): Promise<User | undefined> {
         return this.userRepository.findOne({where: {username}})
     }
