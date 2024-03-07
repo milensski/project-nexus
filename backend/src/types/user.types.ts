@@ -1,8 +1,7 @@
-export interface User {
-    id: number,
+export interface UserWithoutPassword {
+    id: string,
     username: string,
     email: string,
-    password: string,
     firstName: string,
     lastName: string,
     createdAt: Date,
