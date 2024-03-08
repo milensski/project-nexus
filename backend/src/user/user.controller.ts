@@ -9,12 +9,12 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 @Controller('users')
 export class UserController {
 
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService) { }
 
     @Get()
+    @UseGuards(JwtAuthGuard)
     async getAllUsers(): Promise<UserWithoutPassword[]> {
         const users: UserWithoutPassword[] = await this.userService.findAll();
-
 
         return users
     }
@@ -27,6 +27,5 @@ export class UserController {
 
         return user
     }
-
 
 }
