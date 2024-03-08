@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TechnologyModule } from './technology/technology.module';
 
 @Module({
   imports: [ConfigModule.forRoot({ envFilePath: '.env' }),
@@ -21,7 +22,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         autoLoadEntities: true,
         synchronize: true,
       })
-    }), UserModule, AuthModule],
+    }), UserModule, AuthModule, TechnologyModule],
   controllers: [AppController],
   providers: [],
 })
