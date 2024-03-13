@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ProjectListing } from "src/project-listing/entities/project-listing.entity";
+import { Column, CreateDateColumn, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -11,7 +12,7 @@ export class User {
     @Column({unique:true})
     email: string
 
-    @Column()
+    @Column({select: false})
     password: string
 
     @Column({nullable: true})
@@ -28,5 +29,11 @@ export class User {
 
     @Column({ default: true })
     isActive: boolean;
+
+    @OneToMany(() => ProjectListing, projectListing => projectListing.owner)
+    ownedListings: ProjectListing[];
+
+    @ManyToMany(() => ProjectListing)
+    participatedListings: ProjectListing[];
 
 }

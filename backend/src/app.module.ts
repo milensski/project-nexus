@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TechnologyModule } from './technology/technology.module';
+import { ProjectListingModule } from './project-listing/project-listing.module';
 
 @Module({
   imports: [ConfigModule.forRoot({ envFilePath: '.env' }),
@@ -22,7 +23,7 @@ import { TechnologyModule } from './technology/technology.module';
         autoLoadEntities: true,
         synchronize: true,
       })
-    }), UserModule, AuthModule, TechnologyModule],
+    }), UserModule, AuthModule, TechnologyModule, ProjectListingModule],
   controllers: [AppController],
   providers: [],
 })

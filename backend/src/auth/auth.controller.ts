@@ -28,7 +28,6 @@ export class AuthController {
     try {
 
       const {password,  ...createdUser } = await this.userService.createUser(createUserDto);
-      console.log(createdUser);
       
       const token = await this.authService.generateToken(createdUser);
 
@@ -36,7 +35,6 @@ export class AuthController {
 
 
     } catch (e) {
-      console.log(e);
       
       throw new HttpException('User with this username or email already exists', HttpStatus.CONFLICT);
     }
