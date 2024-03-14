@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  backend:
+      build:
+        context: ./backend
+        dockerfile: Dockerfile
+      ports:
+        - '3000:3000'
+      environment:
+        NODE_ENV: .env
+      volumes:
+        - ./backend:/app
+      depends_on:
+        - postgres
+      networks:
+        - nexus
   postgres:
     image: postgres:latest
     restart: always
