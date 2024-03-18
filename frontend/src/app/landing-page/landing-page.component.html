@@ -1,1 +1,43 @@
-<p>landing-page works!</p>
+<div class="flex flex-col justify-between  w-full h-screen">
+  <app-nav-bar></app-nav-bar> 
+
+
+  <!-- Hero Section -->
+  <section class="h-80 bg-white flex items-center justify-center">
+    <div class="container mx-auto text-center">
+      <h1 class="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-sky-400 via-violet-600 to-fuchsia-400 bg-clip-text text-transparent mb-4">Welcome to Project Nexus</h1>
+      <p class="text-lg lg:text-xl bg-gradient-to-r from-sky-400 via-violet-600 to-fuchsia-400 bg-clip-text text-transparent mb-8">Your platform for collaboration and mentorship.</p>
+      <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg shadow-blue-500" routerLink="/home">Get Started</a>
+    </div>
+  </section>
+  
+  
+  <!-- Features Section -->
+  <section class="py-20">
+    <div class="container mx-auto text-center">
+      <h2 class="text-3xl lg:text-4xl font-bold mb-12">How it Works</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white shadow-md rounded-lg p-6 custom-radial-gradient-blue-left">
+          <h3 class="text-xl font-semibold mb-4">1. Project Listings</h3>
+          <p class="text-lg text-gray-700">Students, industry partners, and nonprofits can create project listings detailing the scope, objectives, requirements, and expected deliverables of their projects.</p>
+        </div>
+        <div class="bg-white shadow-md rounded-lg p-6 custom-radial-gradient-blue-top">
+          <h3 class="text-xl font-semibold mb-4">2. Browse and Apply</h3>
+          <p class="text-lg text-gray-700">Students can browse through project listings based on their interests, skills, and career goals. They can read project descriptions, view project requirements, and apply to participate in projects that align with their interests and expertise.</p>
+        </div>
+        <div class="bg-white shadow-md rounded-lg p-6 custom-radial-gradient-blue-right">
+          <h3 class="text-xl font-semibold mb-4">3. Project Teams</h3>
+          <p class="text-lg text-gray-700">Once selected for a project, students are assigned to project teams led by a project manager or mentor. Project teams typically consist of a mix of students with different skills and backgrounds to encourage collaboration and diversity of perspectives.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="bg-purple-800 text-white py-8">
+    <div class="container mx-auto text-center">
+      <p>&copy; 2024 Project Nexus. All rights reserved.</p>
+    </div>
+  </footer>
+</div>

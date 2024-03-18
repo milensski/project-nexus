@@ -7,7 +7,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full', },
   {path: '', component: LandingPageComponent},
-  { path: '/home', component: MainComponent },
+  { path: 'home', component: MainComponent },
   { path: '**', component: PageNotFoundComponentComponent }
 
 ];
