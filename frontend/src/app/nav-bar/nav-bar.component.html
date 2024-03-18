@@ -1,18 +1,15 @@
 <mat-toolbar color="primary" class="flex mx-auto justify-between items-center">
     <div class="flex items-center ">
         <div class="h-9 mr-2">
-        <img class='w-full h-full' src="../../assets/img/logo.svg" alt="Logo">
+          <a routerLink="/"><img class='w-full h-full' src="../../assets/img/logo.svg" alt="Logo"></a>
         </div>
-      <h1 class="ml-2">Project Nexus &lt;/nX&gt;</h1>
+      <h1 class="ml-2"><a routerLink="/">Project Nexus &lt;/nX&gt;</a></h1>
     </div>
     <div class="flex items-center gap-2">
-      <button mat-icon-button>
-        <mat-icon>account_circle</mat-icon>
-      </button>
       <button mat-flat-button color="primary">Login</button>
-      <button mat-flat-button color="primary">
-        <mat-icon>favorite</mat-icon>
+      <a href="https://github.com/milensski/project-nexus" target="_blank" mat-flat-button color="primary">
+        <mat-icon>star_border</mat-icon>
         GitHub
-      </button>
+      </a>
     </div>
   </mat-toolbar>
