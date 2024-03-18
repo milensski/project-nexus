@@ -21,6 +21,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
+import { PrivacyDialogComponent } from './privacy-dialog/privacy-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { RegisterComponent } from './register/register/register.component';
     NavBarComponent,
     LoginComponent,
     RegisterComponent,
+    PrivacyDialogComponent,
   ],
   imports: [
     BrowserModule,
