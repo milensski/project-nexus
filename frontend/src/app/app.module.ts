@@ -17,6 +17,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTree, MatTreeModule} from '@angular/material/tree';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {MatTree, MatTreeModule} from '@angular/material/tree';
     MainComponent,
     PageNotFoundComponentComponent,
     SideNavComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,

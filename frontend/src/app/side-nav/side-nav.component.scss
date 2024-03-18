@@ -5,7 +5,6 @@ h1 {
 h2 {padding: 1rem;}
 
 mat-toolbar{
-    position:fixed;
     top:0;
     z-index: 2;
 }
@@ -16,9 +15,9 @@ mat-sidenav-container {
 
 // Move the content down so that it won't be hidden by the toolbar
 mat-sidenav {
-    padding-top: 3.5rem;
+    padding-top: 0rem;
     @media screen and (min-width: 600px) {
-      padding-top: 4rem;
+      padding-top: 0.5rem;
     }
 
     .entry{
