@@ -22,6 +22,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
 import { PrivacyDialogComponent } from './privacy-dialog/privacy-dialog.component';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,6 @@ import { PrivacyDialogComponent } from './privacy-dialog/privacy-dialog.componen
     NavBarComponent,
     LoginComponent,
     RegisterComponent,
-    PrivacyDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +48,8 @@ import { PrivacyDialogComponent } from './privacy-dialog/privacy-dialog.componen
     MatMenuModule,
     MatFormFieldModule,
     MatTreeModule,
+    MatDialogModule,
+    PrivacyDialogComponent
 
   ],
   providers: [],
