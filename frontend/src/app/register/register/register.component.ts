@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  termsAccepted = false
 
+  onTermsAccepted(accepted:boolean) {
+    this.termsAccepted = accepted
+  }
 }

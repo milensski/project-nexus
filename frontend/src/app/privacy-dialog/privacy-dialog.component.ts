@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-privacy-dialog',
@@ -10,12 +10,22 @@ import {MatButtonModule} from '@angular/material/button';
   imports: [MatButtonModule, MatDialogModule],
 })
 export class PrivacyDialogComponent {
-  constructor(public dialog: MatDialog) {}
+
+  @Output() termsAccepted = new EventEmitter<boolean>();
+
+  constructor(public dialog: MatDialog) { }
 
   openDialog() {
     const dialogRef = this.dialog.open(PrivacyDialogContent);
 
-    dialogRef.afterClosed().subscribe(result => {console.log(`Dialog: ${result}`)})
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.termsAccepted.emit(true)
+      } else {
+        this.termsAccepted.emit(false)
+      }
+
+    })
   }
 }
 
@@ -25,4 +35,4 @@ export class PrivacyDialogComponent {
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],
 })
-export class PrivacyDialogContent {}
+export class PrivacyDialogContent { }
