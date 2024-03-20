@@ -1,27 +1,21 @@
-<div class="flex justify-between items-center gap-2">
-  <mat-toolbar color="primary">
-    <div class="flex justify-between items-center w-full">
-      <div class="flex items-center">
-        <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <h1><a routerLink="/home">Project Nexus &lt;/nX&gt;</a></h1>
-      </div>
-      <div class="flex justify-end items-center">
-        <button mat-icon-button>
-          <mat-icon>account_circle</mat-icon>
-        </button>
-        <button mat-flat-button color="primary">
-          Login
-        </button>
-        <button mat-flat-button color="primary">
-          <mat-icon>favorite</mat-icon>
-          GitHub
-        </button>
-      </div>
+<mat-toolbar color="primary" class="flex mx-auto justify-between items-center">
+  <div class="flex items-center ">
+    <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="h-9 mr-2">
+      <a routerLink="/"><img class='w-full h-full' src="../../assets/img/logo.svg" alt="Logo"></a>
     </div>
-  </mat-toolbar>
-</div>
+    <h1 class="ml-2"><a routerLink="/">Project Nexus &lt;/nX&gt;</a></h1>
+  </div>
+  <div class="flex items-center gap-2">
+    <button mat-flat-button color="primary" routerLink="login">Login</button>
+    <a href="https://github.com/milensski/project-nexus" target="_blank" mat-flat-button color="primary">
+      <mat-icon>star_border</mat-icon>
+      GitHub
+    </a>
+  </div>
+</mat-toolbar>
 
 <mat-sidenav-container class="h-screen" autosize>
   <mat-sidenav [opened]="true" mode="side">
@@ -51,7 +45,6 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    TEST ESTSTTST
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
