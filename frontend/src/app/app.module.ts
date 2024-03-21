@@ -24,6 +24,10 @@ import { RegisterComponent } from './register/register/register.component';
 import { PrivacyDialogComponent } from './privacy-dialog/privacy-dialog.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { AuthComponent } from './auth/auth.component';
+import { LoginModule } from './login/login.module';
+import { FormGroup } from '@angular/forms';
+import { AuthService } from './auth/auth.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,6 @@ import { AuthComponent } from './auth/auth.component';
     SideNavComponent,
     LandingPageComponent,
     NavBarComponent,
-    LoginComponent,
     RegisterComponent,
     AuthComponent,
   ],
@@ -51,8 +54,9 @@ import { AuthComponent } from './auth/auth.component';
     MatFormFieldModule,
     MatTreeModule,
     MatDialogModule,
-    PrivacyDialogComponent
-
+    PrivacyDialogComponent,
+    LoginModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
