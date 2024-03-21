@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="flex mx-auto justify-between items-center">
   <div class="flex items-center ">
-    <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+    <button *ngIf="!isLandingPage()" mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
       <mat-icon>menu</mat-icon>
     </button>
     <div class="h-9 mr-2">
@@ -9,7 +9,7 @@
     <h1 class="ml-2"><a routerLink="/">Project Nexus &lt;/nX&gt;</a></h1>
   </div>
   <div class="flex items-center gap-2">
-    <button mat-flat-button color="primary" routerLink="login">Login</button>
+    <button mat-flat-button color="primary" routerLink="auth/login">Login</button>
     <a href="https://github.com/milensski/project-nexus" target="_blank" mat-flat-button color="primary">
       <mat-icon>star_border</mat-icon>
       GitHub
@@ -18,7 +18,7 @@
 </mat-toolbar>
 
 <mat-sidenav-container class="h-screen" autosize>
-  <mat-sidenav [opened]="true" mode="side">
+  <mat-sidenav *ngIf="!isLandingPage()" [opened]="true" mode="side">
     <mat-nav-list>
       <a mat-list-item>
         <span class="entry">

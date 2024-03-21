@@ -9,7 +9,6 @@ import { PrivacyDialogComponent } from '../privacy-dialog/privacy-dialog.compone
 @NgModule({
   declarations: [
     RegisterComponent,
-    PrivacyDialogComponent
   ],
   imports: [
     CommonModule,

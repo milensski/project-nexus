@@ -2,6 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class SideNavComponent {
   isCollapsed = false;
   isOpen = true
 
-  constructor(private observer: BreakpointObserver) {}
+  isMenuHidden = true
+
+  constructor(private observer: BreakpointObserver, private router: Router) {}
 
   ngOnInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
@@ -28,6 +31,7 @@ export class SideNavComponent {
         this.isMobile = false;
       }
     });
+
   }
 
     toggleMenu() {
@@ -41,4 +45,14 @@ export class SideNavComponent {
     
     }
   }
+
+
+  isLandingPage() {
+    return this.router.url === '/'
+  }
+
+  isLoginRegisterPage() {
+    return (this.router.url === '/login' || this.router.url === '/register')
+  }
+
 }

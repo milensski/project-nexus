@@ -5,13 +5,22 @@ import { PageNotFoundComponentComponent } from './page-not-found-component/page-
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full', },
-  { path: '', component: LandingPageComponent },
-  { path: 'home', component: MainComponent },
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent},
+  { path: '', children: [
+    { path: '', component: LandingPageComponent },
+    { path: 'home', component: MainComponent },
+  ], component: SideNavComponent },
+ 
+  { 
+    path: 'auth', pathMatch: 'prefix',
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent }
+    ], component: AuthComponent
+  },
 
   { path: '**', component: PageNotFoundComponentComponent }
 

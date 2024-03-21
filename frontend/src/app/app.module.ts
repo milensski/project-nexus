@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
 import { PrivacyDialogComponent } from './privacy-dialog/privacy-dialog.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
     NavBarComponent,
     LoginComponent,
     RegisterComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
