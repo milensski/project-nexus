@@ -51,8 +51,5 @@ export class SideNavComponent {
     return this.router.url === '/'
   }
 
-  isLoginRegisterPage() {
-    return (this.router.url === '/login' || this.router.url === '/register')
-  }
 
 }
