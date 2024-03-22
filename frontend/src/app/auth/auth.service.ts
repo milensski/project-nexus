@@ -1,63 +1,63 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
-import { User } from '../types';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
+import { User, UserToken } from '../types';
+import { HttpClient } from '@angular/common/http';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public handleError(error: HttpErrorResponse) {
-    if (error.status === 401) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.log('Bad Credentials', error.error);
-      return throwError(() => new Error('Bad credentials'))
-      
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, body was: `, error.error);
-    }
-    // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Something bad happened; please try again later.'));
-  }
+  private readonly JWT_TOKEN = 'token';
 
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  private currentUserSubject: BehaviorSubject<UserToken>;
+  public currentUser: Observable<UserToken>;
+  loggedUser: string = ''
 
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem('currentUser');
     const parsedUser = storedUser ? JSON.parse(storedUser) : null;
-    this.currentUserSubject = new BehaviorSubject<User>(parsedUser);
+    this.currentUserSubject = new BehaviorSubject<UserToken>(parsedUser);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): User {
+  public get currentUserValue(): UserToken {
     return this.currentUserSubject.value;
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>('http://localhost:3000/auth/login/', { username, password })
+    return this.http.post<any>('http://localhost:3000/auth/login/', { username, password }).pipe(
+      tap((token: any) =>
+        this.doLoginUser(username, JSON.stringify(token))
+      )
+    );
+  }
 
-
+  private doLoginUser(username: string, token: any) {
+    const decodedToken = jwtDecode(token);
+    const user: UserToken = decodedToken as UserToken
     
-    // return this.http.post<any>('http://localhost:3000/auth/login', { username, password })
-    // .pipe(map(user => {
+    this.loggedUser = username;
+    this.storeJwtToken(token);
+    debugger
+    this.currentUserSubject.next(user);
+  }
 
-    // if (user && user.token) {
-    // // store user details in local storage to keep user logged in
-    // localStorage.setItem('currentUser', 'test');
-    // this.currentUserSubject.next(user);
-    // }
-     
-    // return user;
-    // }));
-    }
-     
-    logout() {
+  private storeJwtToken(jwt: string) {
+    localStorage.setItem(this.JWT_TOKEN, jwt);
+  }
+
+  getUsers() {
+    return this.http.get<any>('http://localhost:3000/user')
+  }
+
+  isLoggedIn() {
+    return !!localStorage.getItem(this.JWT_TOKEN);
+  }
+
+  logout() {
     // remove user data from local storage for log out
     localStorage.removeItem('currentUser');
-    }
-    
+  }
+
 }

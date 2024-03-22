@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     MatButtonModule,
+    MatSnackBarModule,
     FormsModule,
     RouterModule
   ],
