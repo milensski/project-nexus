@@ -34,12 +34,11 @@ export class SideNavComponent {
       }
     });
     this.authService.currentUser.subscribe((user) => (this.currentUser = user));
-    debugger
   }
 
   ngAfterContentChecked() {
     if (this.currentUser) {
-      console.log('Current user:', this.currentUser.value); // Access user information here
+      console.log('Current user:', this.currentUser); // Access user information here
     }
   }
 

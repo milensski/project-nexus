@@ -39,16 +39,12 @@ export class AuthService {
     
     this.loggedUser = username;
     this.storeJwtToken(token);
-    debugger
+
     this.currentUserSubject.next(user);
   }
 
   private storeJwtToken(jwt: string) {
     localStorage.setItem(this.JWT_TOKEN, jwt);
-  }
-
-  getUsers() {
-    return this.http.get<any>('http://localhost:3000/user')
   }
 
   isLoggedIn() {
@@ -59,5 +55,11 @@ export class AuthService {
     // remove user data from local storage for log out
     localStorage.removeItem('currentUser');
   }
+
+  getUsers() {
+    return this.http.get<any>('http://localhost:3000/user')
+  }
+
+  
 
 }

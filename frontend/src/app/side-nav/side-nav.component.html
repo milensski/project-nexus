@@ -9,7 +9,7 @@
     <h1 class="ml-2"><a routerLink="/">Project Nexus &lt;/nX&gt;</a></h1>
   </div>
   <div class="flex items-center gap-2">
-    <span *ngIf="currentUser">Hi, {{currentUser}}</span>
+    <span *ngIf="currentUser">Hi, {{currentUser.username}}</span>
     <button mat-flat-button color="primary" routerLink="auth/login">Login</button>
     <a href="https://github.com/milensski/project-nexus" target="_blank" mat-flat-button color="primary">
       <mat-icon>star_border</mat-icon>
