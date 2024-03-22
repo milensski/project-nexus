@@ -27,7 +27,8 @@ import { AuthComponent } from './auth/auth.component';
 import { LoginModule } from './login/login.module';
 import { FormGroup } from '@angular/forms';
 import { AuthService } from './auth/auth.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     LoginModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

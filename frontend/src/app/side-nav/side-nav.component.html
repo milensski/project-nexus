@@ -9,6 +9,7 @@
     <h1 class="ml-2"><a routerLink="/">Project Nexus &lt;/nX&gt;</a></h1>
   </div>
   <div class="flex items-center gap-2">
+    <span *ngIf="currentUser">Hi, {{currentUser}}</span>
     <button mat-flat-button color="primary" routerLink="auth/login">Login</button>
     <a href="https://github.com/milensski/project-nexus" target="_blank" mat-flat-button color="primary">
       <mat-icon>star_border</mat-icon>
@@ -17,7 +18,7 @@
   </div>
 </mat-toolbar>
 
-<mat-sidenav-container class="h-screen" autosize>
+<mat-sidenav-container class="h-[900px]" autosize>
   <mat-sidenav *ngIf="!isLandingPage()" [opened]="true" mode="side">
     <mat-nav-list>
       <a mat-list-item>

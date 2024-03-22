@@ -13,15 +13,17 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor() { }
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let reqUrl = 'localhost:4200';
+    let reqUrl = 'http://localhost:3000';
     req = req.clone({
       headers: req.headers.set(
         "Authorization",
-        "Bearer " + localStorage.getItem("token")
+        "Bearer " + JSON.parse(localStorage.getItem("token")!)
       ),
-      url: reqUrl + "" + req.url
+      // url: reqUrl + ""
     });
+
     return next.handle(req);
   }
 }
+
 

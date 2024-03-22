@@ -3,6 +3,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 
 @Component({
@@ -20,8 +21,9 @@ export class SideNavComponent {
   isOpen = true
 
   isMenuHidden = true
+  currentUser: any
 
-  constructor(private observer: BreakpointObserver, private router: Router) {}
+  constructor(private observer: BreakpointObserver, private router: Router, private authService : AuthService) {}
 
   ngOnInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
@@ -31,7 +33,14 @@ export class SideNavComponent {
         this.isMobile = false;
       }
     });
+    this.authService.currentUser.subscribe((user) => (this.currentUser = user));
+    debugger
+  }
 
+  ngAfterContentChecked() {
+    if (this.currentUser) {
+      console.log('Current user:', this.currentUser.value); // Access user information here
+    }
   }
 
     toggleMenu() {

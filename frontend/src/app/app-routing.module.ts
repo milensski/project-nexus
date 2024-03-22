@@ -7,11 +7,12 @@ import { LoginComponent } from './login/login/login.component';
 import { RegisterComponent } from './register/register/register.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { AuthComponent } from './auth/auth.component';
+import { authGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', children: [
     { path: '', component: LandingPageComponent },
-    { path: 'home', component: MainComponent },
+    { path: 'home', component: MainComponent , canActivate: [authGuard]},
   ], component: SideNavComponent },
  
   { 
