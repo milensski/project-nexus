@@ -1,0 +1,18 @@
+
+
+.mat-mdc-snack-bar-container {
+  margin-top: 20px !important;
+
+
+  &.error-custom {
+    --mdc-snackbar-container-color: rgba(233, 0, 0, 0.933);
+    --mat-snack-bar-button-color: white;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+
+  &.sucess-custom {
+    --mdc-snackbar-container-color: rgb(33, 166, 0);
+    --mat-snack-bar-button-color: white;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}
