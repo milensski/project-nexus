@@ -29,6 +29,7 @@ import { FormGroup } from '@angular/forms';
 import { AuthService } from './auth/auth.service';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     NavBarComponent,
     RegisterComponent,
     AuthComponent,
+    AuthWrapperComponent,
   ],
   imports: [
     BrowserModule,

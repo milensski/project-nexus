@@ -42,7 +42,7 @@ export class LoginComponent {
         })
       )
       .subscribe((res) => {
-        localStorage.setItem('token', JSON.stringify(res.token))
+        localStorage.setItem('token', res.token)
         this.errorHandlingService.showSuccessMessage('Login success')
         this.router.navigate(['/home'])
       });

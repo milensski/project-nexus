@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
   allUsers = '';
 
   constructor(private authService: AuthService) {
-    this.currentUser = localStorage.getItem('currentUser') || 'Milen'
+    this.currentUser = localStorage.getItem('currentUser') || 'Anonymous'
   }
 
   ngOnInit() {

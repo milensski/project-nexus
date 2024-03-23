@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -6,23 +6,40 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
+import { UserToken } from '../types';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
-  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let reqUrl = 'http://localhost:3000';
-    req = req.clone({
-      headers: req.headers.set(
-        "Authorization",
-        "Bearer " + JSON.parse(localStorage.getItem("token")!)
-      ),
-      // url: reqUrl + ""
-    });
-
-    return next.handle(req);
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    debugger
+    const token = localStorage.getItem('token');
+    try {
+      const decodedToken: UserToken = jwtDecode(String(token))
+      if (token && !this.authService.isTokenExpired(decodedToken.exp)) {
+        req = req.clone({
+          setHeaders: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        return next.handle(req);
+      } else {
+        // Token is expired, remove it
+        localStorage.removeItem('token');
+        // Redirect to login or do something else
+        this.router.navigate(['/auth/login']);
+        // Or throw an error if necessary
+        return next.handle(req);
+      }
+    } catch (e) {
+      console.warn(e);
+      return next.handle(req)
+    }
   }
 }
 

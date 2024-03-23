@@ -2,21 +2,22 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 import { User, UserToken } from '../types';
 import { HttpClient } from '@angular/common/http';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly JWT_TOKEN = 'token';
+  public readonly JWT_TOKEN = 'token';
 
   private currentUserSubject: BehaviorSubject<UserToken>;
   public currentUser: Observable<UserToken>;
   loggedUser: string = ''
 
   constructor(private http: HttpClient) {
-    const storedUser = localStorage.getItem('currentUser');
-    const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+    const storedUser = localStorage.getItem('token') as any;
+    debugger
+    const parsedUser = storedUser ? storedUser : null;
     this.currentUserSubject = new BehaviorSubject<UserToken>(parsedUser);
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -34,9 +35,10 @@ export class AuthService {
   }
 
   private doLoginUser(username: string, token: any) {
+    debugger
     const decodedToken = jwtDecode(token);
     const user: UserToken = decodedToken as UserToken
-    
+
     this.loggedUser = username;
     this.storeJwtToken(token);
 
@@ -53,13 +55,28 @@ export class AuthService {
 
   logout() {
     // remove user data from local storage for log out
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem(this.JWT_TOKEN);
+  }
+
+  getUser(token: string | null) {
+  
+    if (token) {
+      const decodedToken = jwtDecode(token) as UserToken
+      return this.http
+        .get<UserToken>(`http://localhost:3000/user/${decodedToken.id}`)
+        .pipe(tap((user) => this.currentUserSubject.next(user)));
+    }
+    return throwError('no user')
   }
 
   getUsers() {
     return this.http.get<any>('http://localhost:3000/user')
   }
 
-  
+  isTokenExpired(exp: number): boolean {
+    const expiry = exp;
+    return expiry ? (Date.now() >= expiry * 1000) : true;
+  }
+
 
 }
