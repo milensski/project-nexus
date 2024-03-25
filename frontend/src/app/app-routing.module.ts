@@ -8,14 +8,17 @@ import { RegisterComponent } from './register/register/register.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
+import { ExploreComponent } from './explore/explore.component';
 
 const routes: Routes = [
-  { path: '', children: [
-    { path: '', component: LandingPageComponent },
-    { path: 'home', component: MainComponent , canActivate: [AuthGuard]},
-  ], component: SideNavComponent },
- 
-  { 
+  {
+    path: '', children: [
+      { path: '', component: LandingPageComponent },
+      { path: 'home', component: MainComponent, canActivate: [AuthGuard] },
+      {path: 'explore', component: ExploreComponent}
+    ], component: SideNavComponent},
+
+  {
     path: 'auth', pathMatch: 'prefix',
     children: [
       { path: 'login', component: LoginComponent },

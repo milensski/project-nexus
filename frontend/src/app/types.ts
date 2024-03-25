@@ -13,9 +13,18 @@ export interface User {
 }
 
 export interface UserToken {
-        id: string,
-        username: string,
-        email: string,
-        iat: number,
-        exp: number
+    id: string,
+    username: string,
+    email: string,
+    iat: number,
+    exp: number
+}
+
+export interface Project {
+    "id": string,
+    "title": string,
+    "description": string,
+    "category": string,
+    "createdAt": string,
+    "updatedAt": string,
 }

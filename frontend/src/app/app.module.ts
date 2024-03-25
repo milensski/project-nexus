@@ -32,6 +32,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
 import { FooterComponent } from './footer/footer.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ExploreComponent } from './explore/explore.component';
+import { CardProjectComponent } from './project/card-project/card-project.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AuthComponent,
     AuthWrapperComponent,
     FooterComponent,
+    ExploreComponent,
+    CardProjectComponent,
+
   ],
   imports: [
     BrowserModule,

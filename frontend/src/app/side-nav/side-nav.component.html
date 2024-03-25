@@ -32,7 +32,7 @@
       <a mat-list-item>
         <span class="entry">
           <mat-icon>explore</mat-icon>
-          <span *ngIf="!isCollapsed">Explore</span>
+          <span *ngIf="!isCollapsed" routerLink="explore">Explore</span>
         </span>
       </a>
       <a mat-list-item>
@@ -47,8 +47,10 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content class="flex justify-between gap-24">
+    <div class="flex-col w-8/12 m-auto mt-5">
     <router-outlet></router-outlet>
+  </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <app-footer></app-footer>
