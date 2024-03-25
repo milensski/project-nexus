@@ -15,6 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class MainComponent implements OnInit {
   currentUser = '';
+  isLoading = true;
 
   allUsers = '';
 
@@ -31,6 +32,7 @@ export class MainComponent implements OnInit {
       })
     )
     .subscribe((data) => {
+      this.isLoading = false
       this.allUsers = data
       
     })

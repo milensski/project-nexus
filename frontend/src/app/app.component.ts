@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 
@@ -10,9 +10,15 @@ import { Router } from '@angular/router';
 
 
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+
+  isLoading = true
 
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.isLoading = false
+  }
 
   isLoginPage() {
     return this.router.url === '/auth/login'

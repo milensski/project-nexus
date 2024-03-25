@@ -31,6 +31,7 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
 import { FooterComponent } from './footer/footer.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { FooterComponent } from './footer/footer.component';
     MatFormFieldModule,
     MatTreeModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
     PrivacyDialogComponent,
     LoginModule,
     HttpClientModule
