@@ -27,4 +27,6 @@ export interface Project {
     "category": string,
     "createdAt": string,
     "updatedAt": string,
+    "owner": User,
+    "participiants": User
 }

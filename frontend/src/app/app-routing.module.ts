@@ -9,13 +9,15 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './auth/auth.guard';
 import { ExploreComponent } from './explore/explore.component';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 const routes: Routes = [
   {
     path: '', children: [
       { path: '', component: LandingPageComponent },
       { path: 'home', component: MainComponent, canActivate: [AuthGuard] },
-      {path: 'explore', component: ExploreComponent}
+      {path: 'explore',component: ExploreComponent},
+      {path: 'project/:id', component: ProjectDetailsComponent}
     ], component: SideNavComponent},
 
   {

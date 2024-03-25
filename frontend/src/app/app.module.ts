@@ -34,6 +34,7 @@ import { FooterComponent } from './footer/footer.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ExploreComponent } from './explore/explore.component';
 import { CardProjectComponent } from './project/card-project/card-project.component';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CardProjectComponent } from './project/card-project/card-project.compon
     FooterComponent,
     ExploreComponent,
     CardProjectComponent,
+    ProjectDetailsComponent,
 
   ],
   imports: [
