@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class RegisterComponent {
   termsAccepted = false
 
-  onTermsAccepted(accepted:boolean) {
+  onTermsAccepted(accepted: boolean) {
     this.termsAccepted = accepted
   }
 }

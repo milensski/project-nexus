@@ -1,22 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisterComponent } from './register/register.component';
 import { MatButtonModule } from '@angular/material/button';
-import { PrivacyDialogComponent } from './privacy-dialog/privacy-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CardProjectComponent } from './card-project/card-project.component';
+import { ProjectDetailsComponent } from '../project-details/project-details.component';
 
 
 
 @NgModule({
-  declarations: [
-    RegisterComponent,
-    PrivacyDialogComponent,
-  ],
+  declarations: [CardProjectComponent, ProjectDetailsComponent],
   imports: [
     CommonModule,
     MatButtonModule,
     MatDialogModule,
   ],
-  exports: [RegisterComponent]
+  exports: [CardProjectComponent]
 })
-export class RegisterModule { }
+export class ProjectModule { }

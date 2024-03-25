@@ -1,6 +1,6 @@
 <a href="#"
   class="relative block overflow-hidden rounded-lg border border-gray-100 shadow-lg shadow-purple-200 p-4 sm:p-6 lg:p-8 transition hover:bg-gray-100"
-  [routerLink]="['/project', project.id]">
+  (click)="openProjectDetails(project)">
   <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
 
   <div class="sm:flex sm:justify-between sm:gap-4">

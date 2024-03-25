@@ -20,9 +20,7 @@ import {MatTree, MatTreeModule} from '@angular/material/tree';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LoginComponent } from './login/login/login.component';
-import { RegisterComponent } from './register/register/register.component';
-import { PrivacyDialogComponent } from './privacy-dialog/privacy-dialog.component';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialog, MatDialogModule,} from '@angular/material/dialog';
 import { AuthComponent } from './auth/auth.component';
 import { LoginModule } from './login/login.module';
 import { FormGroup } from '@angular/forms';
@@ -36,6 +34,8 @@ import { ExploreComponent } from './explore/explore.component';
 import { CardProjectComponent } from './project/card-project/card-project.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { RegisterModule } from './register/register.module';
+import { ProjectModule } from './project/project.module';
 
 
 @NgModule({
@@ -46,13 +46,10 @@ import {MatExpansionModule} from '@angular/material/expansion';
     SideNavComponent,
     LandingPageComponent,
     NavBarComponent,
-    RegisterComponent,
     AuthComponent,
     AuthWrapperComponent,
     FooterComponent,
     ExploreComponent,
-    CardProjectComponent,
-    ProjectDetailsComponent,
 
   ],
   imports: [
@@ -71,12 +68,13 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    PrivacyDialogComponent,
     LoginModule,
+    RegisterModule,
+    ProjectModule,
     HttpClientModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,  }
   ],
   bootstrap: [AppComponent]
 })
