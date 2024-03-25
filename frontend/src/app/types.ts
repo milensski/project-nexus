@@ -28,5 +28,5 @@ export interface Project {
     "createdAt": string,
     "updatedAt": string,
     "owner": User,
-    "participiants": User
+    "participants": User[]
 }

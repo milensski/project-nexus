@@ -13,4 +13,8 @@ export class ProjectService {
   getProjects(): any {
     return this.http.get<Project[]>(`${API}/project`)
   }
+
+  getProject(id: string | null): any {
+    return this.http.get<Project>(`${API}/project/${id}`)
+  }
 }

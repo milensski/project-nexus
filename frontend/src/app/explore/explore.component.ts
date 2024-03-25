@@ -5,10 +5,11 @@ import { ProjectService } from '../project/project.service';
 @Component({
   selector: 'app-explore',
   templateUrl: './explore.component.html',
-  styleUrls: ['./explore.component.scss']
+  styleUrls: ['./explore.component.scss'],
 })
 export class ExploreComponent implements OnInit {
 
+  isExpanded=false;
   isLoading = true
 
   projects: Project[] = []

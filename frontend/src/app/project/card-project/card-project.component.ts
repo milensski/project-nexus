@@ -9,5 +9,5 @@ import { Project } from '../../types';
 export class CardProjectComponent {
   @Input() project: Project = {} as Project;
 
-  
+  isExpanded: boolean = false;
 }

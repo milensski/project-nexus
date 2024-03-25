@@ -35,6 +35,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ExploreComponent } from './explore/explore.component';
 import { CardProjectComponent } from './project/card-project/card-project.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 @NgModule({
   declarations: [
@@ -68,6 +70,7 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
     MatTreeModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatExpansionModule,
     PrivacyDialogComponent,
     LoginModule,
     HttpClientModule
