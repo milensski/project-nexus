@@ -43,14 +43,14 @@ export class ProjectListingService {
     return await this.projectListingRepository.save(projectListing);
   }
   async findAll() {
-    return await this.projectListingRepository.find();
+    return await this.projectListingRepository.find({relations: ['owner', 'participants']});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} projectListing`;
+  findOne(id: string) {
+    return this.projectListingRepository.findOne({where: {id: id}, relations: ['owner', 'participants']});
   }
 
-  update(id: number, updateProjectListingDto: UpdateProjectListingDto) {
+  update(id: string, updateProjectListingDto: UpdateProjectListingDto) {
     return `This action updates a #${id} projectListing`;
   }
 

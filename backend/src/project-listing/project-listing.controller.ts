@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, NotFoundException } from '@nestjs/common';
 import { ProjectListingService } from './project-listing.service';
 import { CreateProjectListingDto } from './dto/create-project-listing.dto';
 import { UpdateProjectListingDto } from './dto/update-project-listing.dto';
@@ -21,13 +21,21 @@ export class ProjectListingController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.projectListingService.findOne(+id);
+  async findOne (@Param('id') id: string) {
+    try {
+      return await this.projectListingService.findOne(id);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        return undefined; // Or return a custom error response object
+      } else {
+        throw error; // Re-throw other errors for NestJS handling
+      }
+    }
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProjectListingDto: UpdateProjectListingDto) {
-    return this.projectListingService.update(+id, updateProjectListingDto);
+    return this.projectListingService.update(id, updateProjectListingDto);
   }
 
   @Delete(':id')
