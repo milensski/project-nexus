@@ -12,8 +12,8 @@ export class AuthWrapperComponent implements OnInit{
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    const token = localStorage.getItem(this.authService.JWT_TOKEN)
-    this.authService.getUser(token).subscribe({
+    const user = localStorage.getItem(this.authService.CURRENT_USER)
+    this.authService.getUser(user).subscribe({
       next: () => {
         this.isAuthenticating = false;
       },

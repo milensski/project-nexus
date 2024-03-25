@@ -23,7 +23,7 @@ export class SideNavComponent {
   isMenuHidden = true
   currentUser: any
 
-  constructor(private observer: BreakpointObserver, private router: Router, private authService : AuthService) {}
+  constructor(private observer: BreakpointObserver, private router: Router, public authService : AuthService) {}
 
   ngOnInit() {
     this.observer.observe(['(max-width: 800px)']).subscribe((screenSize) => {
@@ -38,7 +38,7 @@ export class SideNavComponent {
 
   ngAfterContentChecked() {
     if (this.currentUser) {
-      console.log('Current user:', this.currentUser); // Access user information here
+      // console.log('Current user:', this.currentUser); // Access user information here
     }
   }
 
@@ -54,9 +54,12 @@ export class SideNavComponent {
     }
   }
 
+  logout() {
+    this.authService.logout()
+  }
 
   isLandingPage() {
-    return this.router.url === '/'
+    return this.router.url === '/' || this.router.url === '/?refresh=true'
   }
 
 

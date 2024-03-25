@@ -32,7 +32,6 @@ export class MainComponent implements OnInit {
     )
     .subscribe((data) => {
       this.allUsers = data
-      console.log(this.allUsers);
       
     })
   }

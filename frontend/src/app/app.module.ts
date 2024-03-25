@@ -30,6 +30,7 @@ import { AuthService } from './auth/auth.service';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
     RegisterComponent,
     AuthComponent,
     AuthWrapperComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

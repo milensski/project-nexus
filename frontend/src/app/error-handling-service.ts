@@ -20,7 +20,7 @@ export class ErrorHandlingService {
     }
 
     showAuthError(message: string) {
-        this.snackBar.open(message, 'Try Again',  {
+        this.snackBar.open(message, 'OK',  {
             duration: 3000,
             verticalPosition: 'top',
             panelClass: ['error-custom']

@@ -10,7 +10,8 @@
   </div>
   <div class="flex items-center gap-2">
     <span *ngIf="currentUser">Hi, {{currentUser.username}}</span>
-    <button mat-flat-button color="primary" routerLink="auth/login">Login</button>
+    <button *ngIf="!currentUser" mat-flat-button color="primary" routerLink="auth/login">Login</button>
+    <button *ngIf="currentUser" mat-flat-button color="primary" (click)="logout()">Logout</button>
     <a href="https://github.com/milensski/project-nexus" target="_blank" mat-flat-button color="primary">
       <mat-icon>star_border</mat-icon>
       GitHub
@@ -18,8 +19,8 @@
   </div>
 </mat-toolbar>
 
-<mat-sidenav-container class="h-[900px]" autosize>
-  <mat-sidenav *ngIf="!isLandingPage()" [opened]="true" mode="side">
+<mat-sidenav-container class="h-full" autosize>
+  <mat-sidenav *ngIf="!isLandingPage()" [opened]="true"  mode="side">
     <mat-nav-list>
       <a mat-list-item>
         <span class="entry">
@@ -46,6 +47,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+<app-footer></app-footer>

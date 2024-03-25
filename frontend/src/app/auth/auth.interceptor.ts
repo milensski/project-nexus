@@ -17,11 +17,11 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService, private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    debugger
-    const token = localStorage.getItem('token');
+    const storedUser = localStorage.getItem(this.authService.CURRENT_USER);
+    const token = localStorage.getItem(this.authService.JWT_TOKEN)
     try {
-      const decodedToken: UserToken = jwtDecode(String(token))
-      if (token && !this.authService.isTokenExpired(decodedToken.exp)) {
+      const parsedUser = storedUser ? JSON.parse(storedUser) : null
+      if (parsedUser && !this.authService.isTokenExpired(parsedUser.exp)) {
         req = req.clone({
           setHeaders: {
             Authorization: `Bearer ${token}`
@@ -30,7 +30,8 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(req);
       } else {
         // Token is expired, remove it
-        localStorage.removeItem('token');
+        localStorage.removeItem(this.authService.JWT_TOKEN);
+        localStorage.removeItem(this.authService.CURRENT_USER)
         // Redirect to login or do something else
         this.router.navigate(['/auth/login']);
         // Or throw an error if necessary
