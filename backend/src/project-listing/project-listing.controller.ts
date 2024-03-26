@@ -38,6 +38,15 @@ export class ProjectListingController {
     return this.projectListingService.update(id, updateProjectListingDto);
   }
 
+  @Post(':id/join')
+  @UseGuards(JwtAuthGuard)
+  async join(@Param('id') projectId: string, @Body() participant) {
+    const userId = participant.id
+    await this.projectListingService.joinProject(userId, projectId)
+
+    return {masage: 'Joined successfully'}
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.projectListingService.remove(+id);

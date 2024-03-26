@@ -20,15 +20,19 @@ export class ProjectService {
   }
 
   joinProject(project: Project) {
-    const url = `${API}/${project.id}/join`;
+    const url = `${API}/project/${project.id}/join`;
     const user = localStorage.getItem(this.authService.CURRENT_USER)
-    debugger
     this.http.post(url, {user}).subscribe(
       (response) => {
+
+        console.log(response)
         // Handle successful join response
         // this.project.participants.push(currentUser);  // Update local participants list
       },
       (error) => {
+
+        console.log(error);
+        
         // Handle error joining project
       }
     );

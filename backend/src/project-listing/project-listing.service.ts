@@ -54,6 +54,19 @@ export class ProjectListingService {
     return `This action updates a #${id} projectListing`;
   }
 
+  async joinProject(userId: string, projectId: string) {
+    // Update project data to reflect user joining
+    // (e.g., add user to project's participants list)
+
+    let project = await this.findOne(projectId)
+    const user = await this.userRepository.findOne({where: {id: userId}})
+
+    project.participants.push(user);
+    const result = await this.projectListingRepository.save(project);
+
+    return result
+  }
+
   remove(id: number) {
     return `This action removes a #${id} projectListing`;
   }
