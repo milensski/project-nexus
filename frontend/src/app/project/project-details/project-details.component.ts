@@ -6,6 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { CardProjectComponent } from '../card-project/card-project.component';
+import { ProjectModule } from '../project.module';
 
 @Component({
   selector: 'app-project-details',
@@ -28,8 +30,6 @@ export class ProjectDetailsComponent {
   selector: 'app-project-details-content',
   templateUrl: './project-details-content.component.html',
   styleUrls: ['./project-details.component.scss'],
-  standalone: true,
-  imports: [CommonModule, MatDialogModule, MatButtonModule, MatDividerModule, MatIconModule],
 })
 export class ProjectDetailsContent {
 

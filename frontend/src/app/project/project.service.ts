@@ -23,7 +23,7 @@ export class ProjectService {
     const url = `${API}/${project.id}/join`;
     const user = localStorage.getItem(this.authService.CURRENT_USER)
     debugger
-    this.http.post(url, {participant: user}).subscribe(
+    this.http.post(url, {user}).subscribe(
       (response) => {
         // Handle successful join response
         // this.project.participants.push(currentUser);  // Update local participants list

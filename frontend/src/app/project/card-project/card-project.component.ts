@@ -3,6 +3,7 @@ import { Project } from '../../types';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectDetailsContent } from '../project-details/project-details.component';
 
+
 @Component({
   selector: 'app-card-project',
   templateUrl: './card-project.component.html',
