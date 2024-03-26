@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Project } from '../../types';
 import { MatDialog } from '@angular/material/dialog';
-import { ProjectDetailsContent } from '../project-details/project-details.component';
+import { ProjectDetailsContent } from '../../project-details/project-details.component';
 
 
 @Component({
