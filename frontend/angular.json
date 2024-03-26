@@ -32,7 +32,8 @@
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss",
-              "src/assets/css/custom-toast.scss"
+              "src/assets/css/custom-toast.scss",
+              "src/assets/css/custom-dialog.scss"
             ],
             "scripts": []
           },

@@ -33,4 +33,6 @@ export class PrivacyDialogComponent {
   standalone: true,
   imports: [MatDialogModule, MatButtonModule],
 })
-export class PrivacyDialogContent { }
+export class PrivacyDialogContent { 
+  
+}

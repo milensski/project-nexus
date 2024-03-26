@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from '../types';
 import { ProjectService } from '../project/project.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ProjectDetailsComponent } from '../project-details/project-details.component';
+import { ProjectDetailsComponent } from '../project/project-details/project-details.component';
 
 @Component({
   selector: 'app-explore',

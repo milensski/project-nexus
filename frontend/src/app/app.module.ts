@@ -32,9 +32,9 @@ import { FooterComponent } from './footer/footer.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ExploreComponent } from './explore/explore.component';
 import { CardProjectComponent } from './project/card-project/card-project.component';
-import { ProjectDetailsComponent } from './project-details/project-details.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { RegisterModule } from './register/register.module';
+import { MatDividerModule } from '@angular/material/divider';
 import { ProjectModule } from './project/project.module';
 
 
@@ -50,7 +50,6 @@ import { ProjectModule } from './project/project.module';
     AuthWrapperComponent,
     FooterComponent,
     ExploreComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -64,10 +63,7 @@ import { ProjectModule } from './project/project.module';
     MatToolbarModule,
     MatMenuModule,
     MatFormFieldModule,
-    MatTreeModule,
-    MatDialogModule,
     MatProgressSpinnerModule,
-    MatExpansionModule,
     LoginModule,
     RegisterModule,
     ProjectModule,

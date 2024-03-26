@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CardProjectComponent } from './card-project/card-project.component';
-import { ProjectDetailsComponent } from '../project-details/project-details.component';
+import { ProjectDetailsComponent, ProjectDetailsContent } from './project-details/project-details.component';
 
 
 
@@ -13,7 +13,9 @@ import { ProjectDetailsComponent } from '../project-details/project-details.comp
     CommonModule,
     MatButtonModule,
     MatDialogModule,
+    ProjectDetailsContent
   ],
-  exports: [CardProjectComponent]
+  exports: [CardProjectComponent],
+  providers: []
 })
 export class ProjectModule { }

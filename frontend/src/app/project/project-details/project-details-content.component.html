@@ -1,0 +1,42 @@
+<h2 mat-dialog-title class="text-center my-10" mat-dialog-title>{{project.title}} Details</h2>
+<mat-dialog-content class="mat-typography">
+  <!-- <div class="flex-col text-center items-center justify-center p-4"> -->
+  <ul class="mt-6 text-center">
+    <li class="mb-4">
+      <h1 class="text-center block text-gray-700 font-semibold mb-1">Description:</h1>
+      <p class="text-gray-900">{{ project.description }}</p>
+    </li>
+    <hr class="mb-4 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+    <li class="mb-4">
+      <span class="text-center block text-gray-700 font-semibold mb-1">Owner:</span>
+      <p class="text-gray-900">{{ project.owner.username }}</p>
+    </li>
+    <hr class="mb-4 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+    <li class="mb-4">
+      <span class="text-center block text-gray-700 font-semibold mb-1">Category:</span>
+      <p class="text-gray-900">{{ project.category }}</p>
+    </li>
+    <hr class="mb-4 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+    <li class="mb-4">
+      <span class="text-center block text-gray-700 font-semibold mb-1">Created:</span>
+      <p class="text-gray-900">{{ project.createdAt | date }}</p>
+    </li>
+    <hr class="mb-4 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+    <li class="mb-4">
+      <div class="flex items-center justify-center">
+        <span class="block text-gray-700 font-semibold mb-1 mr-2">Participants:</span>
+        <ul class="list-disc pl-6 flex flex-wrap">
+          <li *ngFor="let participant of project.participants" class="text-gray-900 mr-4 mb-2">
+            {{ participant.username }}
+          </li>
+          <button mat-icon-button color="primary" class="ml-2" (click)="joinProject()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions>

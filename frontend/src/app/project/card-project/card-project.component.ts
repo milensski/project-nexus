@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Project } from '../../types';
 import { MatDialog } from '@angular/material/dialog';
-import { ProjectDetailsComponent } from 'src/app/project-details/project-details.component';
+import { ProjectDetailsContent } from '../project-details/project-details.component';
 
 @Component({
   selector: 'app-card-project',
@@ -16,10 +16,10 @@ export class CardProjectComponent {
   
   constructor(private dialog: MatDialog) {}
 
-  openProjectDetails(project: Project) {
-    debugger
-    this.dialog.open(ProjectDetailsComponent, {
-      data: project
+  openProjectDetails() {
+    this.dialog.open(ProjectDetailsContent, {
+      data: this.project,
+      width: '800px',
     });
   }
 }
