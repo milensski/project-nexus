@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { PrivacyDialogComponent } from './privacy-dialog/privacy-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,6 +20,8 @@ import { PrivacyDialogComponent } from './privacy-dialog/privacy-dialog.componen
     MatButtonModule,
     MatDialogModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [RegisterComponent]
 })

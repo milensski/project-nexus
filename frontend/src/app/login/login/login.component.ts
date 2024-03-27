@@ -25,7 +25,7 @@ export class LoginComponent {
 
   login(form: NgForm) {
     if (form.invalid) {
-      return; // No need for 'hitted here'
+      return; 
     }
 
     this.authService.login(form.value.username, form.value.password)
