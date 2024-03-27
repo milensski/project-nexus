@@ -15,6 +15,10 @@ export class AuthGuard implements CanActivate {
   canActivate(): boolean {
     const token = localStorage.getItem(this.authService.JWT_TOKEN);
     const currentUser = this.authService.currentUserValue;
+    if (this.router.url === '/explore') {
+          
+      return true
+    }
 
     if (token && currentUser) {
       try {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Project } from '../../types';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectDetailsContent } from '../../project-details/project-details.component';
@@ -12,8 +12,7 @@ import { ProjectDetailsContent } from '../../project-details/project-details.com
 })
 export class CardProjectComponent {
   @Input() project: Project = {} as Project;
-
-  isExpanded: boolean = false;
+  
   
   constructor(private dialog: MatDialog) {}
 
@@ -23,4 +22,6 @@ export class CardProjectComponent {
       width: '800px',
     });
   }
+
+  
 }

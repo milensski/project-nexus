@@ -61,10 +61,45 @@ export class ProjectListingService {
     let project = await this.findOne(projectId)
     const user = await this.userRepository.findOne({where: {id: userId}})
 
+    if (!project) {
+      throw new NotFoundException(`Project with ID ${projectId} not found`);
+    }
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+
     project.participants.push(user);
     const result = await this.projectListingRepository.save(project);
 
     return result
+  }
+
+  async leaveProject(userId: string, projectId: string) {
+    // Update project data to reflect user leave
+    // (e.g., remove user from project's participants list)
+
+    let project = await this.findOne(projectId)
+    const user = await this.userRepository.findOne({where: {id: userId}})
+
+    if (!project) {
+      throw new NotFoundException(`Project with ID ${projectId} not found`);
+    }
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+
+    const index = project.participants.findIndex(participant => participant.id === user.id);
+
+    if (index !== -1) {
+      project.participants.splice(index, 1);
+    } else {
+      throw new NotFoundException(`User ${userId} is not a participant of project ${projectId}`);
+    }
+  
+    // Update the project in the database
+    const savedProject = await this.projectListingRepository.save(project);
+  
+    return savedProject;
   }
 
   remove(id: number) {

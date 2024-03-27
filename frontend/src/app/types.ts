@@ -1,14 +1,12 @@
 export interface User {
+    id: string,
     username: string,
     email: string,
     password: string,
     firstName: string | null,
     lastName: string | null,
-    createdAt: Date,
-    updatedAt: Date,
-    ownedListings: any,
-    participatedListings: any;
-
+    createdAt: string,
+    updatedAt: string,
 
 }
 

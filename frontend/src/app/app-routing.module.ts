@@ -13,13 +13,14 @@ import { ExploreComponent } from './explore/explore.component';
 
 const routes: Routes = [
   {
-    path: '', children: [
+    path: '',
+    children: [
       { path: '', component: LandingPageComponent },
       { path: 'home', component: MainComponent, canActivate: [AuthGuard] },
-      {path: 'explore',component: ExploreComponent},
-      // {path: 'project/:id', component: ProjectDetailsComponent}
-    ], component: SideNavComponent},
-
+      { path: 'explore', component: ExploreComponent }, // Nested under 'home'
+    ],
+    component: SideNavComponent, // SideNavComponent as parent for these child routes
+  },
   {
     path: 'auth', pathMatch: 'prefix',
     children: [

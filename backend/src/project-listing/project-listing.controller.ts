@@ -42,9 +42,18 @@ export class ProjectListingController {
   @UseGuards(JwtAuthGuard)
   async join(@Param('id') projectId: string, @Body() participant) {
     const userId = participant.id
-    await this.projectListingService.joinProject(userId, projectId)
+    const result = await this.projectListingService.joinProject(userId, projectId)
 
-    return {masage: 'Joined successfully'}
+    return result
+  }
+
+  @Post(':id/leave')
+  @UseGuards(JwtAuthGuard)
+  async leave(@Param('id') projectId: string, @Body() participant) {
+    const userId = participant.id
+    const result = await this.projectListingService.leaveProject(userId, projectId)
+
+    return result
   }
 
   @Delete(':id')
