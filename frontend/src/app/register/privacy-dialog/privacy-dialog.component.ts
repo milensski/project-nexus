@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class PrivacyDialogComponent {
 
+
+  isAccepted: boolean = false
   @Output() termsAccepted = new EventEmitter<boolean>();
 
   constructor(public dialog: MatDialog) { }
@@ -18,8 +20,10 @@ export class PrivacyDialogComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        this.isAccepted = true
         this.termsAccepted.emit(true)
       } else {
+        this.isAccepted = false
         this.termsAccepted.emit(false)
       }
 

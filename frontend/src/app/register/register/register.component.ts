@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { emailValidator } from 'src/app/utils/email-validator';
 import { matchPasswordsValidator } from 'src/app/utils/match-passwords-validator';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
 
   
   termsAccepted = false
+
+  
 
   form = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(5)]],
@@ -32,6 +35,7 @@ export class RegisterComponent {
 
   ngOnInit() {
     debugger
+    initFlowbite();
   }
 
   get passGroup() {
