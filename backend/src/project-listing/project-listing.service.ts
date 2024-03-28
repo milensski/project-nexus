@@ -66,7 +66,7 @@ export class ProjectListingService {
     }
     if (!user) {
       throw new NotFoundException(`User with ID ${userId} not found`);
-    }
+    }    
 
     project.participants.push(user);
     const result = await this.projectListingRepository.save(project);

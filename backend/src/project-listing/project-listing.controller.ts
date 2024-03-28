@@ -41,7 +41,8 @@ export class ProjectListingController {
   @Post(':id/join')
   @UseGuards(JwtAuthGuard)
   async join(@Param('id') projectId: string, @Body() participant) {
-    const userId = participant.id
+    const userId = participant.user.id
+
     const result = await this.projectListingService.joinProject(userId, projectId)
 
     return result
@@ -50,7 +51,7 @@ export class ProjectListingController {
   @Post(':id/leave')
   @UseGuards(JwtAuthGuard)
   async leave(@Param('id') projectId: string, @Body() participant) {
-    const userId = participant.id
+    const userId = participant.user.id
     const result = await this.projectListingService.leaveProject(userId, projectId)
 
     return result

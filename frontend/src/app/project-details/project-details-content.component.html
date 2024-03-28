@@ -20,17 +20,18 @@
     </div>
     <hr class="mb-4 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
     <div class="mb-4">
-      <div class="flex items-center justify-center">
-        <span class="block text-gray-700 font-semibold mb-1 mr-2">Participants:</span>
+      <div class="flex items-center justify-center mb-2">
+        <span class="block text-gray-700 font-semibold mr-2">Participants:</span>
         <div class="list-none pl-6 flex items-center">
-          <div *ngFor="let participant of project.participants" class="text-gray-900 mr-4 mb-2 ">
+          <div *ngFor="let participant of project.participants" class="justify-center items-center text-gray-900 mr-4">
             {{ participant.username }}
           </div>
-          <button *ngIf="isLogged" mat-icon-button color="primary" (click)="isParticipant ? leaveProject() : joinProject()">
-            <mat-icon>{{ isParticipant ? 'remove' : 'add' }}</mat-icon>
-          </button>
         </div>
       </div>
+      <button  *ngIf="isLogged" mat-raised-button class="p-4" [color]="isParticipant ? 'warn' : 'accent'" (click)="isParticipant ? leaveProject() : joinProject()">
+        <mat-icon>{{ isParticipant ? 'exit_to_app' : 'add' }}</mat-icon>
+        <span>{{ isParticipant ? 'Leave' : 'Join' }}</span>
+      </button>
     </div>
     <div *ngIf="!isLogged" class="text-grey-dark mt-6 text-center text-red-700 ">
       If you want to participate please 
