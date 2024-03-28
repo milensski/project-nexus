@@ -4,6 +4,9 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { emailValidator } from 'src/app/utils/email-validator';
 import { matchPasswordsValidator } from 'src/app/utils/match-passwords-validator';
 import { initFlowbite } from 'flowbite';
+import { UserReg } from 'src/app/types';
+import { Router } from '@angular/router';
+import { ErrorHandlingService } from 'src/app/error-handling-service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +22,7 @@ export class RegisterComponent implements OnInit {
 
   form = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(5)]],
-    email: ['', ],
+    email: ['', [Validators.required, Validators.email]],
     passGroup: this.fb.group(
       {
         password: ['', [Validators.required]],
@@ -31,11 +34,14 @@ export class RegisterComponent implements OnInit {
     ),
   });
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private errorService: ErrorHandlingService) { }
 
   ngOnInit() {
-    debugger
-    initFlowbite();
+     initFlowbite();
+  }
+
+  get email() {
+    return this.form.get('email')
   }
 
   get passGroup() {
@@ -43,7 +49,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    debugger
     // Handle form submission logic here
     // You can access form values using this.registerForm.value
     if (this.form.invalid) {
@@ -51,21 +56,21 @@ export class RegisterComponent implements OnInit {
     }
 
     if (this.form.valid && this.termsAccepted) {
-      const user = {
-        username: this.form.value.username,
-        email: this.form.value.email,
-        password: this.form.value.passGroup?.password
+      const user: UserReg = {
+        username: this.form.value?.username,
+        email: this.form.value?.email,
+        password: this.form.value.passGroup?.password,
+        rePassword: this.form.value.passGroup?.rePassword
       };
 
-      console.log(user);
-      
-
-      // this.authService.register(user)
-      //   .subscribe(response => {
-      //     // Handle successful registration (e.g., navigate to login)
-      //   }, error => {
-      //     // Handle registration errors
-      //   });
+      this.authService.register(user)
+        .subscribe(response => {
+          debugger
+          this.errorService.showSuccessMessage('Registered successfully')
+          this.router.navigate(['/home']); // Redirect to /home on success
+        }, error => {
+          this.errorService.handleError(error)
+        });
     }
   }
 

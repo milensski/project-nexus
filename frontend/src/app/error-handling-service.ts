@@ -11,11 +11,11 @@ export class ErrorHandlingService {
 
     handleError(error: HttpErrorResponse) {
         if (error.status === 401) {
-            console.warn('Invalid credentials', error);
+            // console.warn('Invalid credentials', error);
             this.showAuthError('Invalid credentials');
         } else {
-            console.error('An unexpected error occurred:', error);
-            this.showAuthError(error.message);
+            // console.error('An unexpected error occurred:', error);
+            this.showAuthError(error.error.message);
         }
     }
 

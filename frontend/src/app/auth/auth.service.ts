@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, Subscribable, Subscription, tap, throwError } from 'rxjs';
-import { User, UserToken } from '../types';
+import { User, UserReg, UserToken } from '../types';
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { jwtDecode, JwtPayload } from 'jwt-decode';
 import { Router } from '@angular/router';
+import { API } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,20 @@ export class AuthService {
       tap((token: any) =>
         this.doLoginUser(username, JSON.stringify(token)))
     )
+  }
+
+  register(user: any): Observable<any> {
+    return this.http.post<User>(`${API}/auth/register`, user)
+      .pipe(
+        tap((response: any) => {
+          // Handle successful registration response (e.g., token)
+          this.doLoginUser(user.username, response.token); // Assuming response contains a token
+        }),
+        catchError(error => {
+          // Handle registration errors
+          return throwError(error);
+        })
+      );
   }
 
   private doLoginUser(username: string, token: any) {

@@ -10,6 +10,13 @@ export interface User {
 
 }
 
+export interface UserReg {
+    username: string | null | undefined,
+    email: string | null | undefined,
+    password: string | null | undefined,
+    rePassword: string | null | undefined,
+}
+
 export interface UserToken {
     id: string,
     username: string,
