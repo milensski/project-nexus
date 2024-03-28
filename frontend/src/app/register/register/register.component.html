@@ -60,9 +60,7 @@
           </ng-container>
         </form>
 
-
-              <app-privacy-dialog (termsAccepted)="onTermsAccepted($event)"></app-privacy-dialog>
-
+         <app-privacy-dialog (termsAccepted)="onTermsAccepted($event)"></app-privacy-dialog>
 
         <div class="text-center text-sm text-red-600 mt-4 mb-3" *ngIf="!termsAccepted">Please review and accept our
           terms and
