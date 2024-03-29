@@ -1,15 +1,15 @@
 import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
-import { Project, User, UserToken } from '../types';
-import { ProjectService } from '../project/project.service';
+import { Project, User, UserToken } from '../../types';
+import { ProjectService } from '../project.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { CardProjectComponent } from '../project/card-project/card-project.component';
-import { ProjectModule } from '../project/project.module';
-import { ErrorHandlingService } from '../error-handling-service';
-import { AuthService } from '../auth/auth.service';
+import { CardProjectComponent } from '../card-project/card-project.component';
+import { ProjectModule } from '../project.module';
+import { ErrorHandlingService } from '../../error-handling-service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-project-details',

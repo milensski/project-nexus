@@ -1,0 +1,193 @@
+<div class="min-h-full p-6 bg-gray-100 flex items-start justify-center">
+    <div class="container max-w-screen-lg mx-auto my-10">
+        <div>
+            <h2 class="font-semibold text-xl text-gray-600">Create project</h2>
+            <p class="text-gray-500 mb-6">Transform Your Vision into Reality: Ignite Your Passion</p>
+
+            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                    <div class="text-gray-600">
+                        <p class="font-medium text-lg">Details</p>
+                        <p>Please fill out all the fields.</p>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <div class="grid gap-4 gap-y-2 text-md grid-cols-1 md:grid-cols-5">
+
+                            <div class="relative mb-8 md:col-span-3">
+                                <input type="text" id="title" name="title" formControlName="title" class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1
+                          appearance-none dark:text-white" placeholder=""
+                                    [ngClass]="{'border-red-600 dark:border-red-500 focus:border-red-600': form.get('title')?.touched && form.get('title')?.errors}" />
+                                <label for="title" class="absolute text- font-medium text-gray-500 dark:text-gray-400 duration-300 
+                                    transform -translate-y-4 scale-85 top-2 z-10 origin-[0] bg-white
+                                     dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600
+                                      peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 
+                                      peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 
+                                      rtl:peer-focus:left-auto start-1">Title</label>
+                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"
+                                    *ngIf="form?.get('title')?.touched && form?.get('title')?.errors">
+                                    <span class="font-medium">*</span> {{
+                                    form.get('title')?.errors?.['required']?.message ||
+                                    'Title is required and must be more than 5 characters' }}
+                                </p>
+                            </div>
+
+                            <div class="relative mb-8 md:col-span-5">
+                                <textarea rows="3" id="description" name="description" formControlName="description"
+                                    class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1
+                          appearance-none dark:text-white" placeholder=""
+                                    [ngClass]="{'border-red-600 dark:border-red-500 focus:border-red-600': form.get('description')?.touched && form.get('description')?.errors}"></textarea>
+                                <label for="description" class="absolute text-sm font-medium text-gray-500 dark:text-gray-400 duration-300 
+                                    transform -translate-y-4 scale-85 top-2 z-10 origin-[0] bg-white
+                                     dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600
+                                      peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 
+                                      peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 
+                                      rtl:peer-focus:left-auto start-1">Description</label>
+                                <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"
+                                    *ngIf="form?.get('description')?.touched && form?.get('description')?.errors">
+                                    <span class="font-medium">*</span> {{
+                                    form.get('description')?.errors?.['required']?.message ||
+                                    'Description is required' }}
+                                </p>
+                            </div>
+
+                            <div class="md:col-span-3">
+                                <label for="category"
+                                    class="block mb-2 text-sm font-medium text-gray-500 dark:text-white">Select a
+                                    category</label>
+                                <select id="category"
+                                    name="category"
+                                    formControlName="category"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option [value]="null" selected >Choose a category</option>
+                                    <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label for="city">City</label>
+                                <input type="text" name="city" id="city"
+                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label for="country">Country / region</label>
+                                <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                    <input name="country" id="country" placeholder="Country"
+                                        class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                                        value="" />
+                                    <button tabindex="-1"
+                                        class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
+                                        <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+                                    <button tabindex="-1" for="show_more"
+                                        class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                        <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="18 15 12 9 6 15"></polyline>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label for="state">State / province</label>
+                                <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                    <input name="state" id="state" placeholder="State"
+                                        class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                                        value="" />
+                                    <button tabindex="-1"
+                                        class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
+                                        <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                                        </svg>
+                                    </button>
+                                    <button tabindex="-1" for="show_more"
+                                        class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                        <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="18 15 12 9 6 15"></polyline>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="md:col-span-1">
+                                <label for="zipcode">Zipcode</label>
+                                <input type="text" name="zipcode" id="zipcode"
+                                    class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                    placeholder="" value="" />
+                            </div>
+
+                            <div class="md:col-span-5">
+                                <div class="inline-flex items-center">
+                                    <input type="checkbox" name="billing_same" id="billing_same"
+                                        class="form-checkbox" />
+                                    <label for="billing_same" class="ml-2">My billing address is different than
+                                        above.</label>
+                                </div>
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label for="soda">How many soda pops?</label>
+                                <div class="h-10 w-28 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                    <button tabindex="-1" for="show_more"
+                                        class="cursor-pointer outline-none focus:outline-none border-r border-gray-200 transition-all text-gray-500 hover:text-blue-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                    <input name="soda" id="soda" placeholder="0"
+                                        class="px-2 text-center appearance-none outline-none text-gray-800 w-full bg-transparent"
+                                        value="0" />
+                                    <button tabindex="-1" for="show_more"
+                                        class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-500 hover:text-blue-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2 fill-current"
+                                            viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="md:col-span-5 text-right">
+                                <div class="inline-flex items-end">
+                                    <button
+                                        class="relative w-full flex justify-center items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize   bg-purple-600 rounded-md hover:bg-green-400  focus:outline-none   transition duration-300 transform active:scale-95 ease-in-out">
+                                        <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24"
+                                            height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+                                            <g>
+                                                <rect fill="none" height="24" width="24"></rect>
+                                            </g>
+                                            <g>
+                                                <g>
+                                                    <path d="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6V13z"></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                        <span class="pl-2 mx-1">Create new shipping label</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

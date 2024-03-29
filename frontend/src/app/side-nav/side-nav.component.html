@@ -40,9 +40,9 @@
           <mat-icon>dashboard</mat-icon>
           <span *ngIf="!isCollapsed">Menu</span>
         </span>
-        <mat-menu #menu="matMenu" #aboveMenu="matMenu" xPosition="before" yPosition="below">
-          <button mat-menu-item>Item 1</button>
-          <button mat-menu-item>Item 2</button>
+        <mat-menu class="ml-4" #menu="matMenu" #aboveMenu="matMenu" xPosition="before" yPosition="below">
+          <button mat-menu-item routerLink="project/create" ><mat-icon>add</mat-icon>Create Project</button>
+          <button mat-menu-item><mat-icon>folder_shared</mat-icon>My Projects</button>
         </mat-menu>
       </a>
     </mat-nav-list>

@@ -1,9 +1,10 @@
-<div class="flex justify-between items-center my-5 ">
-    <div class="flex-col w-3/6 m-auto space-y-8">
-
+<div class="flex justify-start">
+    <div class="container mx-10">
+    <div class="flex-col justify-between m-20 w-full h-screen">
         <mat-spinner *ngIf="isLoading" class="center-spinner" />
-        <div>
+        <div class="flex-col justify-between items-center">
             <app-card-project *ngFor="let project of projects" [project]="project"></app-card-project>
         </div>
     </div>
+</div>
 </div>
