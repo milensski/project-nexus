@@ -36,7 +36,7 @@ Connecting aspiring project managers and developers.
   ```
 4. Navigate to frontend folder and run the following:
  ```bash
-    ng server
+    ng serve
  ```
 This will start Angular server on your localhost
 
