@@ -27,11 +27,25 @@ export interface UserToken {
 
 export interface Project {
     "id": string,
-    "title": string,
-    "description": string,
-    "category": string,
-    "createdAt": string,
-    "updatedAt": string,
+    "title": string | null | undefined,
+    "description": string | null | undefined,
+    "category": string | null | undefined,
+    "techStackNames": Techology[],
+    "createdAt": string | null | undefined,
+    "updatedAt": string | null | undefined, 
     "owner": User,
     "participants": User[]
+}
+
+export interface CreateProject {
+    "title": string | null | undefined,
+    "description": string | null | undefined,
+    "category": string | null | undefined,
+    "techStackNames": Techology[],
+    "ownerId": string | null | undefined,
+    "participantIds": string[] | null | undefined
+}
+
+export interface Techology {
+    "technologyName": string
 }

@@ -20,7 +20,7 @@ export class TechnologyService {
   }
 
   async findAll(): Promise<Technology[]> {
-    return this.technologyRepository.find();
+    return this.technologyRepository.find({select: {technologyName: true}});
   }
 
   async findOne(id: Technology['id']): Promise<Technology> {

@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = localStorage.getItem(this.authService.JWT_TOKEN)
 
     const isPublicRouter = PUBLIC_ENDPOINTS.some(endpoint => req.url.startsWith(endpoint))
-    if (!isPublicRouter || req.url.endsWith('/leave') || req.url.endsWith('/join')) {
+    if ((!isPublicRouter || req.method !== 'GET') || req.url.endsWith('/leave') || req.url.endsWith('/join')) {
       if (storedUser && token) {
         try {
           const parsedUser = JSON.parse(storedUser);

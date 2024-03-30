@@ -16,26 +16,20 @@ import { PageNotFoundComponentComponent } from './page-not-found-component/page-
 import { SideNavComponent } from './side-nav/side-nav.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatTree, MatTreeModule} from '@angular/material/tree';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { LoginComponent } from './login/login/login.component';
-import {MatDialog, MatDialogModule,} from '@angular/material/dialog';
 import { AuthComponent } from './auth/auth.component';
 import { LoginModule } from './login/login.module';
-import { FormGroup } from '@angular/forms';
-import { AuthService } from './auth/auth.service';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AuthWrapperComponent } from './auth-wrapper/auth-wrapper.component';
 import { FooterComponent } from './footer/footer.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ExploreComponent } from './explore/explore.component';
-import { CardProjectComponent } from './project/card-project/card-project.component';
-import {MatExpansionModule} from '@angular/material/expansion';
 import { RegisterModule } from './register/register.module';
-import { MatDividerModule } from '@angular/material/divider';
 import { ProjectModule } from './project/project.module';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -64,6 +58,8 @@ import { ProjectModule } from './project/project.module';
     MatMenuModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
+    MatChipsModule,
+    MatAutocompleteModule,
     LoginModule,
     RegisterModule,
     ProjectModule,

@@ -27,27 +27,43 @@ export class ProjectListingService {
       throw new NotFoundException('One or more participants not found');
     }
 
-    const techStackPromises = techStackNames.map((techStackName) => this.technologyRepository.findOne({ where: { technologyName: techStackName } }));
-    const techStack = await Promise.all(techStackPromises);
-    if (techStack.length !== techStackNames.length) {
-      throw new NotFoundException('One or more technologies not found');
-    }
+    // Efficiently check for existing technologies using IN operator
+    const existingTechnologies = await this.technologyRepository.find({
+      where: { technologyName: In(techStackNames) },
+    });
+
+    // Filter missing technology names
+    const missingTechnologies = techStackNames.filter(
+      (techName) => !existingTechnologies.some((tech) => tech.technologyName === techName),
+    );
+
+    // Create missing technologies
+    const createdTechnologies = await Promise.all(
+      missingTechnologies.map((techName) => this.technologyRepository.create({ technologyName: techName })),
+    );
+    await this.technologyRepository.save(createdTechnologies); // Save created technologies
+
+    // Combine existing and created technologies
+    const allTechnologies = existingTechnologies.concat(createdTechnologies);
+    
+    console.log(allTechnologies);
+    
 
     const projectListing = this.projectListingRepository.create({
       ...createProjectListingDto,
       owner,
       participants,
-      techStack,
+      techStack: allTechnologies,
     });
 
     return await this.projectListingRepository.save(projectListing);
   }
   async findAll() {
-    return await this.projectListingRepository.find({relations: ['owner', 'participants']});
+    return await this.projectListingRepository.find({ relations: ['owner', 'participants'] });
   }
 
   findOne(id: string) {
-    return this.projectListingRepository.findOne({where: {id: id}, relations: ['owner', 'participants']});
+    return this.projectListingRepository.findOne({ where: { id: id }, relations: ['owner', 'participants'] });
   }
 
   update(id: string, updateProjectListingDto: UpdateProjectListingDto) {
@@ -59,14 +75,14 @@ export class ProjectListingService {
     // (e.g., add user to project's participants list)
 
     let project = await this.findOne(projectId)
-    const user = await this.userRepository.findOne({where: {id: userId}})
+    const user = await this.userRepository.findOne({ where: { id: userId } })
 
     if (!project) {
       throw new NotFoundException(`Project with ID ${projectId} not found`);
     }
     if (!user) {
       throw new NotFoundException(`User with ID ${userId} not found`);
-    }    
+    }
 
     project.participants.push(user);
     const result = await this.projectListingRepository.save(project);
@@ -79,7 +95,7 @@ export class ProjectListingService {
     // (e.g., remove user from project's participants list)
 
     let project = await this.findOne(projectId)
-    const user = await this.userRepository.findOne({where: {id: userId}})
+    const user = await this.userRepository.findOne({ where: { id: userId } })
 
     if (!project) {
       throw new NotFoundException(`Project with ID ${projectId} not found`);
@@ -95,10 +111,10 @@ export class ProjectListingService {
     } else {
       throw new NotFoundException(`User ${userId} is not a participant of project ${projectId}`);
     }
-  
+
     // Update the project in the database
     const savedProject = await this.projectListingRepository.save(project);
-  
+
     return savedProject;
   }
 

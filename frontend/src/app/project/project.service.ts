@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Project, User, UserToken } from '../types';
+import { CreateProject, Project, Techology, User, UserToken } from '../types';
 import { API } from '../constants';
 import { AuthService } from '../auth/auth.service';
 import { ErrorHandlingService } from '../error-handling-service';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +13,20 @@ export class ProjectService {
 
   constructor(private http: HttpClient, private authService: AuthService, errorService: ErrorHandlingService) { }
 
+  createProject(project: CreateProject): Observable<Project> {
+    return this.http.post<Project>(`${API}/project`, project)
+  }
+
   getProjects(): any {
     return this.http.get<Project[]>(`${API}/project`)
   }
 
   getProject(id: string | null): any {
     return this.http.get<Project>(`${API}/project/${id}`)
+  }
+
+  getTechnologies(): Observable<Techology[]> {
+    return this.http.get<Techology[]>(`${API}/technology`)
   }
 
   joinProject(project: Project): any {
