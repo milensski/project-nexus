@@ -1,4 +1,4 @@
-
+<div class="flex flex-col min-h-screen h-full">
 <mat-toolbar color="primary" class="flex mx-auto justify-between items-center">
   <div class="flex items-center ">
     <button *ngIf="!isLandingPage()" mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
@@ -20,7 +20,7 @@
   </div>
 </mat-toolbar>
 
-<mat-sidenav-container class="h-full" autosize>
+<mat-sidenav-container autosize>
   <mat-sidenav *ngIf="!isLandingPage()" [opened]="true"  mode="side">
     <mat-nav-list>
       <a mat-list-item routerLink="home">
@@ -42,13 +42,16 @@
         </span>
         <mat-menu class="ml-4" #menu="matMenu" #aboveMenu="matMenu" xPosition="before" yPosition="below">
           <button mat-menu-item routerLink="project/create" ><mat-icon>add</mat-icon>Create Project</button>
-          <button mat-menu-item><mat-icon>folder_shared</mat-icon>My Projects</button>
+          <button mat-menu-item routerLink="project/manage"><mat-icon>folder_shared</mat-icon>My Projects</button>
         </mat-menu>
       </a>
     </mat-nav-list>
+    
   </mat-sidenav>
-  <mat-sidenav-content class="flex justify-between gap-24">
+  <mat-sidenav-content class="flex justify-center">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <app-footer></app-footer>
+
+</div>

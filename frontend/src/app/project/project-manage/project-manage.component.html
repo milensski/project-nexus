@@ -1,13 +1,13 @@
-<div class="my-10 mx-auto p-4 w-1/2 bg-white border border-gray-200rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+<div class="my-20 mx-auto p-4 w-1/2 bg-white border border-gray-200rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
     <div class="flex items-center justify-between mb-4">
-        <h2 class="text-lg font-bold leading-none text-gray-500 dark:text-white">Explore projects</h2>
+        <h2 class="text-lg font-bold leading-none text-gray-500 dark:text-white">Personal projects</h2>
         <a routerLink="/explore" href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
         </a>
    </div>
    <div class="flow-root">
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
             <li class="py-3 sm:py-4" *ngFor="let project of projects">
-                <app-card-project [project]="project"></app-card-project>
+                <app-flat-card-project [project]="project" ></app-flat-card-project>
             </li>   
         </ul>
    </div>

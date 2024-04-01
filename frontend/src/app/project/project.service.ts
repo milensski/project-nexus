@@ -24,10 +24,15 @@ export class ProjectService {
   getProject(id: string | null): any {
     return this.http.get<Project>(`${API}/project/${id}`)
   }
+  
+  getUserProjects(userId: string): Observable<Project[]> {
+    return this.http.post<Project[]>(`${API}/project/list`, {userId})
+  }
 
   getTechnologies(): Observable<Techology[]> {
     return this.http.get<Techology[]>(`${API}/technology`)
   }
+
 
   joinProject(project: Project): any {
     const url = `${API}/project/${project.id}/join`;

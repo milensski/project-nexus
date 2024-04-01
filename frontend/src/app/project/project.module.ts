@@ -12,18 +12,25 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TechkStackAutocompleteComponent } from '../techk-stack-autocomplete/techk-stack-autocomplete.component';
+import { ProjectManageComponent } from './project-manage/project-manage.component';
+import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
+import { FlatCardProjectComponent } from './flat-card-project/flat-card-project.component';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { InitialsPipe } from './initials.pipe';
 
 
 
 @NgModule({
-  declarations: [CardProjectComponent, ProjectDetailsComponent, ProjectDetailsContent, CreateProjectComponent],
+  declarations: [CardProjectComponent, ProjectDetailsComponent, ProjectDetailsContent, CreateProjectComponent, ProjectManageComponent, FlatCardProjectComponent, InitialsPipe],
   imports: [
     CommonModule,
     MatButtonModule,
     MatDialogModule,
     MatIconModule,
     MatChipsModule,
+    MatProgressSpinnerModule,
     MatAutocompleteModule,
+    MatMenuModule,
     FormsModule,
     MatFormFieldModule,
     NgFor,

@@ -1,0 +1,26 @@
+<div class="flex items-center">
+    <div class="flex-shrink-0">
+        <div class="hidden sm:block sm:shrink-0">
+            <div class="circle">
+                <p class="circle-inner">{{project.title | initials}}</p>
+              </div>
+          </div>
+    </div>
+    <div class="flex-1 min-w-0 ms-4">
+        <p class="text-lg font-medium text-gray-900 truncate dark:text-white">
+            {{project.title}}
+        </p>
+        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+            {{project.description}}
+        </p>
+    </div>
+    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="entry">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+          <mat-menu class="ml-4" #menu="matMenu" #aboveMenu="matMenu" xPosition="after" yPosition="below">
+            <button mat-menu-item (click)="openProjectDetails()" ><mat-icon>notes</mat-icon>Details</button>
+            <button mat-menu-item routerLink="project/manage"><mat-icon>delete</mat-icon>Delete</button>
+          </mat-menu>
+    </div>
+</div>

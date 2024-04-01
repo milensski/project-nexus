@@ -3,6 +3,7 @@ import { ProjectListingService } from './project-listing.service';
 import { CreateProjectListingDto } from './dto/create-project-listing.dto';
 import { UpdateProjectListingDto } from './dto/update-project-listing.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
+import { ListUserProjectsDto } from './dto/list-user-projects.dto';
 
 @Controller('project')
 export class ProjectListingController {
@@ -20,6 +21,12 @@ export class ProjectListingController {
     return this.projectListingService.findAll();
   }
 
+  @Post('list')
+  async findProjects(@Body() user: ListUserProjectsDto) {
+    
+    return await this.projectListingService.findProjectsByUserId(user.userId);
+  }
+
   @Get(':id')
   async findOne (@Param('id') id: string) {
     try {
@@ -32,6 +39,8 @@ export class ProjectListingController {
       }
     }
   }
+
+
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProjectListingDto: UpdateProjectListingDto) {

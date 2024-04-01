@@ -6,6 +6,7 @@ import { ProjectListing } from './entities/project-listing.entity';
 import { In, Repository } from 'typeorm';
 import { Technology } from 'src/technology/entities/technology.entity';
 import { User } from 'src/user/entities/user.entity';
+import { log } from 'console';
 
 @Injectable()
 export class ProjectListingService {
@@ -45,9 +46,9 @@ export class ProjectListingService {
 
     // Combine existing and created technologies
     const allTechnologies = existingTechnologies.concat(createdTechnologies);
-    
+
     console.log(allTechnologies);
-    
+
 
     const projectListing = this.projectListingRepository.create({
       ...createProjectListingDto,
@@ -64,6 +65,13 @@ export class ProjectListingService {
 
   findOne(id: string) {
     return this.projectListingRepository.findOne({ where: { id: id }, relations: ['owner', 'participants'] });
+  }
+
+  findProjectsByUserId(id: string) {
+    
+    return this.projectListingRepository.find({
+      where: { owner: { id } }, relations: ['owner', 'participants']
+    }); 
   }
 
   update(id: string, updateProjectListingDto: UpdateProjectListingDto) {
