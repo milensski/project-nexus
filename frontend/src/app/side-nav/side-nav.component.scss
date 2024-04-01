@@ -9,11 +9,15 @@ h2 {padding: 1rem;}
 mat-toolbar{
     top:0;
     z-index: 2;
+    min-height: 64px;
 }
 
 mat-sidenav-container {
-    height:calc((100% - 64px));
+    flex-grow: 1;
+  
 }
+
+.mat-drawer-container{ overflow: visible !important; }
 
 
 // Move the content down so that it won't be hidden by the toolbar

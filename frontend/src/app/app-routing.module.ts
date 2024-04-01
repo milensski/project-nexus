@@ -25,6 +25,7 @@ const routes: Routes = [
         path: 'project', pathMatch: 'prefix',
         children: [
           {path: ':create', component: CreateProjectComponent},
+          {path: ':id/edit', component: CreateProjectComponent}
         ] 
       },
     ],

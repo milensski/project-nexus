@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ErrorHandlingService } from 'src/app/error-handling-service';
@@ -20,25 +20,49 @@ export class CreateProjectComponent {
     { id: "Frontend", name: "Frontend" }
   ];
 
-  
-
 
  form = this.fb.group({
   title: ['', [Validators.required, Validators.minLength(5)]],
   description: ['', [Validators.required]],
-  category: [null, [Validators.required]],
-  techStackNames: [[], [Validators.required]],
+  category: ['', [Validators.required]],
+  techStackNames: [[] as Techology[], [Validators.required]],
 });
 
 
 constructor(private fb: FormBuilder,  
   private router: Router, 
+  private activatedRoute: ActivatedRoute, 
   private authService: AuthService,
   private porjectService: ProjectService,
   private errorService: ErrorHandlingService) { }
 
 ngOnInit() {
   initFlowbite();
+  this.activatedRoute.params.subscribe(params => {
+    const projectId = params['id']; 
+    const project: Project = {} as Project
+    
+    if (projectId) {
+      this.porjectService.getProject(projectId).subscribe(
+        (response) => {
+          this.form.patchValue({
+            title: response.title,
+            description: response.description,
+            category: response.category,
+            techStackNames: response.techStack?.technologyName
+          })
+          debugger
+        },
+        (error) => {
+          // Handle error
+          this.errorService.handleError(error);
+        }
+      )
+    }
+    
+    
+  });
+  // this.form.get('title')?.setValue('TEST')
 }
 
 ngAfterViewInit() {
@@ -46,9 +70,12 @@ ngAfterViewInit() {
 }
 
 onTechStackSelected(selectedTechStacks: any): void {
-  debugger
-  this.form.get('techStackNames')?.setValue(selectedTechStacks); // Update techStackNames field
+
+  this.form.get('techStackNames')?.setValue(selectedTechStacks);
+  debugger // Update techStackNames field
 }
+
+
   
   onSubmit() {
     
@@ -69,7 +96,6 @@ onTechStackSelected(selectedTechStacks: any): void {
           participantIds: []
         };
       
-        debugger
         this.porjectService.createProject(project)
           .subscribe(response => {
             this.errorService.showSuccessMessage('Project created')

@@ -17,20 +17,31 @@
     <div class="mb-4">
       <span class="text-center block text-gray-700 font-semibold mb-1">Created:</span>
       <p class="text-gray-900">{{ project.createdAt | date }}</p>
+      <hr class="mb-4 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
     </div>
-    <hr class="mb-4 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
-    <div class="mb-4">
-      <div class="flex items-center justify-center mb-12">
+    <div class="flex justify-center items-center">
+      <div class="flex-col items-center justify-center mb-12">
         <span class="block text-gray-700 font-semibold mr-2">Participants:</span>
-        <div class="list-none pl-6 flex items-center">
+        <div class="list-none pl-6 mt-4 flex items-center">
           <div *ngFor="let participant of project.participants" class="justify-center items-center text-gray-900 mr-4">
             {{ participant.username }}
           </div>
         </div>
       </div>
+    </div>
+    <hr class="mb-4 h-0.5 border-t-0 bg-neutral-100 dark:bg-white/10" />
+    <div class="mb-4 flex justify-center gap-4">
       <button  *ngIf="isLogged" mat-raised-button class="p-4" [color]="isParticipant ? 'warn' : 'accent'" (click)="isParticipant ? leaveProject() : joinProject()">
         <mat-icon>{{ isParticipant ? 'exit_to_app' : 'person_add' }}</mat-icon>
         <span>{{ isParticipant ? 'Leave' : 'Join' }}</span>
+      </button>
+      <button routerLink="project/{{project.id}}/edit" *ngIf="isOwner" mat-raised-button class="p-4" color="primary">
+        <mat-icon>edit</mat-icon>
+        <span  mat-dialog-close >Edit</span>
+      </button>
+      <button mat-raised-button class="p-4" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+        <span>Close</span>
       </button>
     </div>
     <div *ngIf="!isLogged" class="text-grey-dark mt-6 text-center text-red-700 ">
@@ -41,9 +52,7 @@
   </div>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions align="start">
+
+<!-- <mat-dialog-actions align="end">
   <button mat-button color="primary" mat-dialog-close>Close</button>
-</mat-dialog-actions>
-<mat-dialog-actions align="end">
-  <button mat-button color="primary" mat-dialog-close>Close</button>
-</mat-dialog-actions>
+</mat-dialog-actions> -->

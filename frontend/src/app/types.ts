@@ -30,7 +30,7 @@ export interface Project {
     "title": string | null | undefined,
     "description": string | null | undefined,
     "category": string | null | undefined,
-    "techStackNames": Techology[],
+    "techStack": Techology | null | undefined,
     "createdAt": string | null | undefined,
     "updatedAt": string | null | undefined, 
     "owner": User,
@@ -47,5 +47,6 @@ export interface CreateProject {
 }
 
 export interface Techology {
-    "technologyName": string
+    "id": string,
+    "technologyName": string | null | undefined
 }

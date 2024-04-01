@@ -47,8 +47,6 @@ export class ProjectListingService {
     // Combine existing and created technologies
     const allTechnologies = existingTechnologies.concat(createdTechnologies);
 
-    console.log(allTechnologies);
-
 
     const projectListing = this.projectListingRepository.create({
       ...createProjectListingDto,
@@ -64,7 +62,7 @@ export class ProjectListingService {
   }
 
   findOne(id: string) {
-    return this.projectListingRepository.findOne({ where: { id: id }, relations: ['owner', 'participants'] });
+    return this.projectListingRepository.findOne({ where: { id: id }, relations: ['owner', 'participants', 'techStack'] });
   }
 
   findProjectsByUserId(id: string) {

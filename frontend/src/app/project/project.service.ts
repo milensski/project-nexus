@@ -21,7 +21,7 @@ export class ProjectService {
     return this.http.get<Project[]>(`${API}/project`)
   }
 
-  getProject(id: string | null): any {
+  getProject(id: string | null): Observable<Project> {
     return this.http.get<Project>(`${API}/project/${id}`)
   }
   

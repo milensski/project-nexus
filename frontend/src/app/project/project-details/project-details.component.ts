@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Project, User, UserToken } from '../../types';
 import { ProjectService } from '../project.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -33,8 +33,9 @@ export class ProjectDetailsComponent {
   templateUrl: './project-details-content.component.html',
   styleUrls: ['./project-details.component.scss'],
 })
-export class ProjectDetailsContent implements OnInit {
+export class ProjectDetailsContent implements OnInit, AfterViewInit {
 
+  public isOwner = false
   isParticipant = false
   isLogged = true
   user: UserToken | string = '';
@@ -47,22 +48,33 @@ export class ProjectDetailsContent implements OnInit {
     private errorService: ErrorHandlingService) { }
 
     ngOnInit(): any {
+
       try {
         const storedUser = localStorage.getItem(this.authService.CURRENT_USER);
         if (storedUser) {
           this.user = JSON.parse(storedUser) as UserToken; // Type cast for safety
           this.isParticipant = this.checkIsParticipant(this.project, this.user)
+          this.isOwner = this.checkIsOwner(this.project, this.user)
           return this.isLogged = true
         }
       } catch (error) {
         return this.isLogged = false
       }
       return this.isLogged = false
+      
     }
+
+    ngAfterViewInit() {
+      
+    }
+
+  checkIsOwner(project: Project, user:UserToken) {
+    return project.owner.username === user.username
+  }
 
   checkIsParticipant(project: Project, user: UserToken) {
 
-    return this.isParticipant = project.participants.some(participant => participant.id === user.id)
+    return project.participants.some(participant => participant.id === user.id)
   }
 
   joinProject() {
