@@ -58,7 +58,7 @@ export class ProjectListingService {
     return await this.projectListingRepository.save(projectListing);
   }
   async findAll() {
-    return await this.projectListingRepository.find({ relations: ['owner', 'participants'] });
+    return await this.projectListingRepository.find({ relations: ['owner', 'participants', 'techStack'] });
   }
 
   findOne(id: string) {
