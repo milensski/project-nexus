@@ -30,7 +30,7 @@ export interface Project {
     "title": string | null | undefined,
     "description": string | null | undefined,
     "category": string | null | undefined,
-    "techStack": Techology | null | undefined,
+    "techStack": Techology[] | null | undefined,
     "createdAt": string | null | undefined,
     "updatedAt": string | null | undefined, 
     "owner": User,

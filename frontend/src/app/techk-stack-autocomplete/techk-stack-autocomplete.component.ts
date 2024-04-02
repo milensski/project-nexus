@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, EventEmitter, Inject, Output, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, Output, ViewChild, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
@@ -34,9 +34,9 @@ export class TechkStackAutocompleteComponent {
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   techCtrl = new FormControl('');
-  filteredTechStacks: Observable<string[]>;
+  filteredTechStacks: Observable<(string | null | undefined)[]>;
   techStacks: string[] = [];
-  allTechStacks: string[] = [
+  allTechStacks: (string | null | undefined)[] = [
     "React",
     "Angular",
     "Vue.js",
@@ -50,6 +50,8 @@ export class TechkStackAutocompleteComponent {
 
   @Output() techStackSelected = new EventEmitter<string[]>();
 
+  @Input() projectId: string = '' // New input property to hold the projectId
+
   announcer = inject(LiveAnnouncer);
 
   projectService = inject(ProjectService)
@@ -62,6 +64,12 @@ export class TechkStackAutocompleteComponent {
   }
 
   ngOnInit() {
+
+    if (this.projectId) {
+      console.log(this.projectId);
+      
+    }
+
     this.getAllTechStacks(); // Fetch tech stacks on component initialization
   }
 
@@ -103,21 +111,25 @@ export class TechkStackAutocompleteComponent {
     this.projectService.getTechnologies()
       .subscribe(technologies => {
         // Handle successful response
-        this.allTechStacks = [...this.allTechStacks, ...technologies.map(tech => tech.technologyName)]; // Combine mock and fetched data
-        this.allTechStacks = this.removeDuplicates(this.allTechStacks); // Remove duplicates
+        this.allTechStacks = [...this.allTechStacks,
+           ...technologies
+           .map(tech => tech.technologyName)
+           .filter(name => name !== null && name !== undefined)]; // Combine mock and fetched data
+        this.allTechStacks = this.removeDuplicates(this.allTechStacks.filter(value => value !== null && value !== undefined)); // Remove duplicates
       }, error => {
         console.error('Error fetching tech stacks:', error);
         // Consider providing user feedback (e.g., a toast notification)
       });
+      debugger
   }
 
 
-  private removeDuplicates(arr: string[]): string[] {
+  private removeDuplicates(arr: (string | null | undefined)[]): (string | null | undefined)[] {
     return Array.from(new Set(arr)); // Use Set for efficient duplicate removal
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: string): (string | null | undefined)[] {
     const filterValue = value.toLowerCase();
-    return this.allTechStacks.filter(tech => tech.toLowerCase().includes(filterValue));
+    return this.allTechStacks.filter(tech => tech?.toLowerCase().includes(filterValue));
   }
 }

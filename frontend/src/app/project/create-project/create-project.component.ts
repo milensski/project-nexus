@@ -6,13 +6,16 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { ErrorHandlingService } from 'src/app/error-handling-service';
 import { CreateProject, Project, Techology, UserToken } from 'src/app/types';
 import { ProjectService } from '../project.service';
+import { TechkStackAutocompleteComponent } from 'src/app/techk-stack-autocomplete/techk-stack-autocomplete.component';
 
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
-  styleUrls: ['./create-project.component.scss']
+  styleUrls: ['./create-project.component.scss'],
 })
 export class CreateProjectComponent {
+
+  projectId = ''
 
   categories = [
     { id: "Full-stack", name: "Full-stack" },
@@ -25,7 +28,7 @@ export class CreateProjectComponent {
   title: ['', [Validators.required, Validators.minLength(5)]],
   description: ['', [Validators.required]],
   category: ['', [Validators.required]],
-  techStackNames: [[] as Techology[], [Validators.required]],
+  techStackNames: [[] as (string | null | undefined)[] , [Validators.required]],
 });
 
 
@@ -39,18 +42,19 @@ constructor(private fb: FormBuilder,
 ngOnInit() {
   initFlowbite();
   this.activatedRoute.params.subscribe(params => {
-    const projectId = params['id']; 
+    this.projectId = params['id']; 
     const project: Project = {} as Project
     
-    if (projectId) {
-      this.porjectService.getProject(projectId).subscribe(
+    if ( this.projectId) {
+      this.porjectService.getProject( this.projectId).subscribe(
         (response) => {
           this.form.patchValue({
             title: response.title,
             description: response.description,
             category: response.category,
-            techStackNames: response.techStack?.technologyName
+            techStackNames: response.techStack?.map(technology => technology.technologyName)
           })
+          // this.fetchedProjectTechStack = response.techStack?.map(technology => technology.technologyName) as string[] || [];
           debugger
         },
         (error) => {
@@ -60,9 +64,7 @@ ngOnInit() {
       )
     }
     
-    
   });
-  // this.form.get('title')?.setValue('TEST')
 }
 
 ngAfterViewInit() {
