@@ -54,8 +54,6 @@ ngOnInit() {
             category: response.category,
             techStackNames: response.techStack?.map(technology => technology.technologyName)
           })
-          // this.fetchedProjectTechStack = response.techStack?.map(technology => technology.technologyName) as string[] || [];
-          debugger
         },
         (error) => {
           // Handle error
@@ -74,7 +72,6 @@ ngAfterViewInit() {
 onTechStackSelected(selectedTechStacks: any): void {
 
   this.form.get('techStackNames')?.setValue(selectedTechStacks);
-  debugger // Update techStackNames field
 }
 
 
@@ -101,6 +98,36 @@ onTechStackSelected(selectedTechStacks: any): void {
         this.porjectService.createProject(project)
           .subscribe(response => {
             this.errorService.showSuccessMessage('Project created')
+            this.router.navigate(['/home']); // Redirect to /home on success
+          }, error => {
+            this.errorService.handleError(error)
+          });
+      }
+    }
+
+
+    onUpdate() {
+    
+      // Handle form submission logic here
+      // You can access form values using this.registerForm.value
+      if (this.form.invalid) {
+        return;
+      }
+  
+      if (this.form.valid) {
+        const owner = JSON.parse(localStorage.getItem(this.authService.CURRENT_USER) || '') as UserToken
+        const project: CreateProject = {
+          title: this.form.value?.title,
+          description: this.form.value?.description,
+          category: this.form.value?.category,
+          techStackNames: this.form.value.techStackNames as any,
+          ownerId: owner.id,
+          participantIds: []
+        };
+      
+        this.porjectService.updateProject(project)
+          .subscribe(response => {
+            this.errorService.showSuccessMessage('Project updated')
             this.router.navigate(['/home']); // Redirect to /home on success
           }, error => {
             this.errorService.handleError(error)

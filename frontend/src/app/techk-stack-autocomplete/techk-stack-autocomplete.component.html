@@ -4,7 +4,7 @@
       <mat-chip-grid #chipGrid aria-label="Tech selection">
         <mat-chip-row *ngFor="let tech of techStacks" (removed)="remove(tech)">
           {{tech}}
-          <button matChipRemove [attr.aria-label]="'remove ' + tech">
+          <button matChipRemove color="primary" [attr.aria-label]="'remove ' + tech">
             <mat-icon>cancel</mat-icon>
           </button>
         </mat-chip-row>

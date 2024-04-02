@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -27,4 +26,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     height: 70px;
     width: 70px;  
     font-size: 24px;
+  }
+
+  .mat-mdc-standard-chip {
+    --mdc-chip-elevated-container-color: #fdeb90; 
+
   }

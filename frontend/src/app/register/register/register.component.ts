@@ -65,7 +65,6 @@ export class RegisterComponent implements OnInit {
 
       this.authService.register(user)
         .subscribe(response => {
-          debugger
           this.errorService.showSuccessMessage('Registered successfully')
           this.router.navigate(['/home']); // Redirect to /home on success
         }, error => {

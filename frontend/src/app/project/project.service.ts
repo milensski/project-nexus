@@ -17,6 +17,11 @@ export class ProjectService {
     return this.http.post<Project>(`${API}/project`, project)
   }
 
+  updateProject(project: CreateProject): Observable<Project> {
+    debugger
+    return this.http.
+  }
+
   getProjects(): any {
     return this.http.get<Project[]>(`${API}/project`)
   }

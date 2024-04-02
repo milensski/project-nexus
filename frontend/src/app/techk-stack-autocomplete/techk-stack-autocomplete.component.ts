@@ -66,7 +66,10 @@ export class TechkStackAutocompleteComponent {
   ngOnInit() {
 
     if (this.projectId) {
-      console.log(this.projectId);
+
+       this.projectService.getProject(this.projectId).subscribe(
+        response => {this.techStacks = response.techStack?.map(technology => technology.technologyName) as string[] }
+       )
       
     }
 
@@ -120,7 +123,6 @@ export class TechkStackAutocompleteComponent {
         console.error('Error fetching tech stacks:', error);
         // Consider providing user feedback (e.g., a toast notification)
       });
-      debugger
   }
 
 
