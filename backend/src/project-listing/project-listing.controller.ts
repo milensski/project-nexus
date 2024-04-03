@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Request, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, UseGuards, NotFoundException, Put } from '@nestjs/common';
 import { ProjectListingService } from './project-listing.service';
 import { CreateProjectListingDto } from './dto/create-project-listing.dto';
 import { UpdateProjectListingDto } from './dto/update-project-listing.dto';
@@ -42,7 +42,8 @@ export class ProjectListingController {
 
 
 
-  @Patch(':id')
+  @Put(':id')
+  @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateProjectListingDto: UpdateProjectListingDto) {
     return this.projectListingService.update(id, updateProjectListingDto);
   }
@@ -67,7 +68,8 @@ export class ProjectListingController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
-    return this.projectListingService.remove(+id);
+    return this.projectListingService.remove(id);
   }
 }

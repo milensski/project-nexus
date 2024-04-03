@@ -17,10 +17,9 @@ export class ProjectService {
     return this.http.post<Project>(`${API}/project`, project)
   }
 
-  // updateProject(project: CreateProject): Observable<Project> {
-  //   debugger
-  //   // return this.http.
-  // }
+  updateProject(project: CreateProject, projectId: string): Observable<Project> {
+    return this.http.put<Project>(`${API}/project/${projectId}`, project)
+  }
 
   getProjects(): any {
     return this.http.get<Project[]>(`${API}/project`)
@@ -57,6 +56,10 @@ export class ProjectService {
       return throwError(() => new Error('You are not participating'));
     }
     return this.http.post<User>(url, {user})
+  }
+
+  deleteProject(projectId: string): Observable<Project> {
+    return this.http.delete<Project>(`${API}/project/${projectId}`)
   }
   
 }

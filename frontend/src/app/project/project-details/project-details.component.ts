@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, Input, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Inject, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Project, User, UserToken } from '../../types';
 import { ProjectService } from '../project.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -10,6 +10,7 @@ import { CardProjectComponent } from '../card-project/card-project.component';
 import { ProjectModule } from '../project.module';
 import { ErrorHandlingService } from '../../error-handling-service';
 import { AuthService } from '../../auth/auth.service';
+import { ProjectEventService } from '../project-event.service';
 
 @Component({
   selector: 'app-project-details',
@@ -40,12 +41,16 @@ export class ProjectDetailsContent implements OnInit, AfterViewInit {
   isLogged = true
   user: UserToken | string = '';
 
+  @Output() projectDeleted: EventEmitter<string> = new EventEmitter<string>();
+
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public project: Project,
     private projectService: ProjectService,
     private authService: AuthService ,
-    private errorService: ErrorHandlingService) { }
+    private errorService: ErrorHandlingService,
+    private projectEventService: ProjectEventService) { }
 
     ngOnInit(): any {
 
@@ -103,5 +108,15 @@ export class ProjectDetailsContent implements OnInit, AfterViewInit {
         this.errorService.showAuthError(error.message)
       }
     )
+  }
+
+  deleteProject() {
+    this.projectService.deleteProject(this.project.id).subscribe(
+      response => {
+        this.errorService.showAuthError('Project DELETED')
+        this.projectEventService.emitProjectDeleted(this.project.id);
+      }, error => {
+        this.errorService.handleError(error)
+      });
   }
 }

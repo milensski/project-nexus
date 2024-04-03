@@ -6,9 +6,10 @@
    </div>
    <div class="flow-root">
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-            <li class="py-3 sm:py-4" *ngFor="let project of projects">
+            <li class="py-3 sm:py-4" *ngFor="let project of projects | paginate: { itemsPerPage: 5, currentPage: p }">
                 <app-card-project [project]="project"></app-card-project>
             </li>   
         </ul>
-   </div>
+    </div>
+    <pagination-controls class="flex items-center justify-center mt-10" (pageChange)="p = $event"></pagination-controls>
 </div>

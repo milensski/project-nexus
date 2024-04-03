@@ -17,11 +17,12 @@ import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress
 import { FlatCardProjectComponent } from './flat-card-project/flat-card-project.component';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { InitialsPipe } from './initials.pipe';
+import { JoinPipe } from './join.pipe';
 
 
 
 @NgModule({
-  declarations: [CardProjectComponent, ProjectDetailsComponent, ProjectDetailsContent, CreateProjectComponent, ProjectManageComponent, FlatCardProjectComponent, InitialsPipe],
+  declarations: [CardProjectComponent, ProjectDetailsComponent, ProjectDetailsContent, CreateProjectComponent, ProjectManageComponent, FlatCardProjectComponent, InitialsPipe, JoinPipe],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -43,3 +44,4 @@ import { InitialsPipe } from './initials.pipe';
   providers: []
 })
 export class ProjectModule { }
+

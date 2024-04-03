@@ -25,4 +25,9 @@ export class ProjectManageComponent {
     });
     
   }
+
+  onProjectDeleted(projectId: string) {
+    // Remove the deleted project from the project list
+    this.projects = this.projects.filter(project => project.id !== projectId);
+  }
 }

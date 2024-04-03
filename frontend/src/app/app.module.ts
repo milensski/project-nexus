@@ -30,6 +30,7 @@ import { RegisterModule } from './register/register.module';
 import { ProjectModule } from './project/project.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     LoginModule,
     RegisterModule,
     ProjectModule,
+    NgxPaginationModule,
     HttpClientModule
   ],
   providers: [

@@ -72,8 +72,49 @@ export class ProjectListingService {
     }); 
   }
 
-  update(id: string, updateProjectListingDto: UpdateProjectListingDto) {
-    return `This action updates a #${id} projectListing`;
+  async update(id: string, updateProjectListingDto: UpdateProjectListingDto): Promise<ProjectListing> {
+    const projectListing = await this.findOne(id)
+
+    if (!projectListing) {
+      throw new NotFoundException(`Project with ID ${id} not found`);
+    }
+
+    // Update project listing fields based on the provided DTO
+    if (updateProjectListingDto.title) {
+      projectListing.title = updateProjectListingDto.title;
+    }
+
+    if (updateProjectListingDto.description) {
+      projectListing.description = updateProjectListingDto.description;
+    }
+
+    if (updateProjectListingDto.category) {
+      projectListing.category = updateProjectListingDto.category;
+    }
+
+    if (updateProjectListingDto.techStackNames) {
+      const existingTechnologies = await this.technologyRepository.find({
+        where: { technologyName: In(updateProjectListingDto.techStackNames) },
+      });
+
+      // Filter missing technology names
+      const missingTechnologies = updateProjectListingDto.techStackNames.filter(
+        (techName) => !existingTechnologies.some((tech) => tech.technologyName === techName),
+      );
+
+      // Create missing technologies
+      const createdTechnologies = await Promise.all(
+        missingTechnologies.map((techName) => this.technologyRepository.create({ technologyName: techName })),
+      );
+      await this.technologyRepository.save(createdTechnologies); // Save created technologies
+
+      // Combine existing and created technologies
+      const allTechnologies = existingTechnologies.concat(createdTechnologies);
+      projectListing.techStack = allTechnologies;
+    }
+
+    // Save the updated project listing
+    return await this.projectListingRepository.save(projectListing);
   }
 
   async joinProject(userId: string, projectId: string) {
@@ -124,7 +165,16 @@ export class ProjectListingService {
     return savedProject;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} projectListing`;
+  async remove(id: string): Promise<void> {
+    // Find the project listing by ID
+    const projectListing = await this.findOne(id);
+
+    // If project listing not found, throw NotFoundException
+    if (!projectListing) {
+      throw new NotFoundException(`Project with ID ${id} not found`);
+    }
+
+    // Remove the project listing
+    await this.projectListingRepository.remove(projectListing);
   }
 }

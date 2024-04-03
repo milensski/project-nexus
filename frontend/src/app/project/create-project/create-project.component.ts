@@ -125,13 +125,13 @@ onTechStackSelected(selectedTechStacks: any): void {
           participantIds: []
         };
       
-        // this.porjectService.updateProject(project)
-        //   .subscribe(response => {
-        //     this.errorService.showSuccessMessage('Project updated')
-        //     this.router.navigate(['/home']); // Redirect to /home on success
-        //   }, error => {
-        //     this.errorService.handleError(error)
-        //   });
+        this.porjectService.updateProject(project, this.projectId)
+          .subscribe(response => {
+            this.errorService.showSuccessMessage('Project updated')
+            this.router.navigate(['project/manage']);
+          }, error => {
+            this.errorService.handleError(error)
+          });
       }
     }
 

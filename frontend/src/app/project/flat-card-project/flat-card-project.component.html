@@ -20,7 +20,8 @@
         </button>
           <mat-menu class="ml-4" #menu="matMenu" #aboveMenu="matMenu" xPosition="after" yPosition="below">
             <button mat-menu-item (click)="openProjectDetails()" ><mat-icon>notes</mat-icon>Details</button>
-            <button mat-menu-item routerLink="project/manage"><mat-icon>delete</mat-icon>Delete</button>
+            <button mat-menu-item [routerLink]="['/project', project.id, 'edit']" ><mat-icon>edit</mat-icon>Edit</button>
+            <button mat-menu-item (click)="deleteProject()"><mat-icon>delete</mat-icon>Delete</button>
           </mat-menu>
     </div>
 </div>
