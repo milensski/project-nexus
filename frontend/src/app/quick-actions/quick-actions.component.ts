@@ -3,6 +3,7 @@ import { Project } from '../types';
 import { ProjectService } from '../project/project.service';
 import { ProjectDetailsContent } from '../project/project-details/project-details.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ErrorHandlingService } from '../error-handling-service';
 
 @Component({
   selector: 'app-quick-actions',
@@ -17,7 +18,8 @@ export class QuickActionsComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private projectService: ProjectService) {}
+    private projectService: ProjectService,
+    private errorHandlingService: ErrorHandlingService) {}
 
 
   ngOnInit(): void {
@@ -36,13 +38,15 @@ export class QuickActionsComponent implements OnInit {
         },
         (error: any) => {
           // Handle error
-          console.error('Error fetching project:', error);
+          return this.errorHandlingService.showAuthError('No last viewed project')
         }
       );
       this.dialog.open(ProjectDetailsContent, {
         data: this.project,
         width: '800px',
       });
+
+      
       
     }
   }
