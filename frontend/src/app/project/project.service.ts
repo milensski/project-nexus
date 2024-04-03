@@ -61,5 +61,17 @@ export class ProjectService {
   deleteProject(projectId: string): Observable<Project> {
     return this.http.delete<Project>(`${API}/project/${projectId}`)
   }
+
+  getUserProjectCountByCategory(userId: string): Observable<{ [category: string]: number }> {
+    return this.http.get<{ [category: string]: number }>(`${API}/project/manage/${userId}/countBy-category`)
+  }
+
+  getUserProjectsCount(userId: string): Observable<{totalCount: number}> {
+    return this.http.get<{totalCount: number}>(`${API}/project/manage/${userId}/count`)
+  }
+
+  getAllUserProjectsParticipants(userId: string): Observable<User[]> {
+    return this.http.get<User[]>(`${API}/project/manage/${userId}/participants`);
+  }
   
 }

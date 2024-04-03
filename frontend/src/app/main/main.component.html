@@ -1,4 +1,19 @@
-<mat-spinner class="center-spinner" *ngIf="isLoading"></mat-spinner>
-<h1 *ngIf="!isLoading"> Hi {{allUsers | json}}!</h1>
+<div class="container mx-auto my-10 p-4 ">
 
-<p>Welcome to home page!!</p>
+    <div>
+        <h1 class="font-normal  text-center text-gray-600">
+            <span class="text-5xl">Welcome to your dashboard</span> <span class="font-medium text-5xl text-gray-500"> {{currentUser}}</span></h1>
+    </div>
+
+    <div class="flex justify-center gap-20 flex-wrap my-20">
+        <app-quick-actions [projectId]="lastViewedProjectId"></app-quick-actions>
+        <app-total-count-project-card></app-total-count-project-card>
+        <app-count-user-projects-category></app-count-user-projects-category>
+    </div>
+    
+    <app-participants-table></app-participants-table>
+
+    
+
+   
+</div>

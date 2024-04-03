@@ -10,7 +10,7 @@
     <h1 class="ml-2"><a routerLink="/">Project Nexus &lt;/nX&gt;</a></h1>
   </div>
   <div class="flex items-center gap-2">
-    <span *ngIf="currentUser">Hi, {{currentUser.username}}</span>
+    <span *ngIf="currentUser"><button mat-flat-button ><mat-icon>person</mat-icon>{{currentUser.username}}</button></span>
     <button *ngIf="!currentUser" mat-flat-button color="primary" routerLink="auth/login">Login</button>
     <button *ngIf="currentUser" mat-flat-button color="primary" (click)="logout()">Logout</button>
     <a href="https://github.com/milensski/project-nexus" target="_blank" mat-flat-button color="primary">

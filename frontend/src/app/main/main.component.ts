@@ -6,6 +6,8 @@ import { SideNavComponent } from '../side-nav/side-nav.component';
 import { AuthService } from '../auth/auth.service';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UserToken } from '../types';
+import { LastViewedProjectService } from '../project/last-viewed-project.service';
 
 @Component({
   selector: 'app-main',
@@ -14,16 +16,18 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 })
 export class MainComponent implements OnInit {
-  currentUser = '';
+  currentUser = ''
   isLoading = true;
-
   allUsers = '';
+  lastViewedProjectId: string | null = '';
 
-  constructor(private authService: AuthService) {
-    this.currentUser = localStorage.getItem('currentUser') || 'Anonymous'
+  constructor(private authService: AuthService, private lastViewedProjectService: LastViewedProjectService) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '').username || 'Anonymous'
   }
 
   ngOnInit() {
+    this.lastViewedProjectId = this.lastViewedProjectService.getLastViewedProject();
+    
     this.authService.getUsers()
     .pipe(
       catchError((error: HttpErrorResponse) => {

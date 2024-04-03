@@ -7,6 +7,7 @@ export interface User {
     lastName: string | null,
     createdAt: string,
     updatedAt: string,
+    projects: Project[]
 
 }
 

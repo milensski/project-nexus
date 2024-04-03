@@ -8,7 +8,7 @@
       <h3 class="text-lg font-bold text-gray-900 sm:text-xl">
         {{project.title}}
       </h3>
-    <p class="mt-1 text-xs font-medium text-gray-600">Team lead: <mat-chip ><img matChipAvatar src="../../../assets/img/profile.png" alt="Photo of a Shiba Inu"/>{{project.owner.username}}</mat-chip></p>
+    <p class="mt-1 text-xs font-medium text-gray-600">Team lead: <mat-chip ><img matChipAvatar src="../../../assets/img/profile.png" alt="user photo"/>{{project.owner.username}}</mat-chip></p>
     </div>
 
     <div class="hidden sm:block sm:shrink-0">
@@ -60,7 +60,7 @@
       </div>
       
       <div class="flex flex-col-reverse items-center">
-        <dd class="text-sm font-medium text-gray-600">{{project.techStack | join }}</dd>
+        <dd class="text-sm font-medium text-gray-600">{{project.techStack | join : 'technologyName' }}</dd>
         <dt class="text-xs text-gray-500">Technology</dt>
 
       </div>

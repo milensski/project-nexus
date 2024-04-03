@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Inject, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Project, User, UserToken } from '../../types';
 import { ProjectService } from '../project.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -11,6 +11,7 @@ import { ProjectModule } from '../project.module';
 import { ErrorHandlingService } from '../../error-handling-service';
 import { AuthService } from '../../auth/auth.service';
 import { ProjectEventService } from '../project-event.service';
+import { LastViewedProjectService } from '../last-viewed-project.service';
 
 @Component({
   selector: 'app-project-details',
@@ -19,7 +20,6 @@ import { ProjectEventService } from '../project-event.service';
 })
 export class ProjectDetailsComponent {
 
-  // @Input() public project: Project = {} as Project // Use public for template access
 
   constructor(
     public dialog: MatDialog, // Inject project data
@@ -34,7 +34,7 @@ export class ProjectDetailsComponent {
   templateUrl: './project-details-content.component.html',
   styleUrls: ['./project-details.component.scss'],
 })
-export class ProjectDetailsContent implements OnInit, AfterViewInit {
+export class ProjectDetailsContent implements OnInit {
 
   public isOwner = false
   isParticipant = false
@@ -44,18 +44,20 @@ export class ProjectDetailsContent implements OnInit, AfterViewInit {
   @Output() projectDeleted: EventEmitter<string> = new EventEmitter<string>();
 
 
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public project: Project,
     private projectService: ProjectService,
     private authService: AuthService ,
     private errorService: ErrorHandlingService,
-    private projectEventService: ProjectEventService) { }
+    private projectEventService: ProjectEventService,
+    private lastViewedProjectService: LastViewedProjectService) { }
 
     ngOnInit(): any {
 
+      
       try {
         const storedUser = localStorage.getItem(this.authService.CURRENT_USER);
+        this.lastViewedProjectService.storeLastViewedProject(this.project.id);
         if (storedUser) {
           this.user = JSON.parse(storedUser) as UserToken; // Type cast for safety
           this.isParticipant = this.checkIsParticipant(this.project, this.user)
@@ -69,9 +71,6 @@ export class ProjectDetailsContent implements OnInit, AfterViewInit {
       
     }
 
-    ngAfterViewInit() {
-      
-    }
 
   checkIsOwner(project: Project, user:UserToken) {
     return project.owner.username === user.username
@@ -113,7 +112,7 @@ export class ProjectDetailsContent implements OnInit, AfterViewInit {
   deleteProject() {
     this.projectService.deleteProject(this.project.id).subscribe(
       response => {
-        this.errorService.showAuthError('Project DELETED')
+        this.errorService.showSuccessMessage('Project deleted')
         this.projectEventService.emitProjectDeleted(this.project.id);
       }, error => {
         this.errorService.handleError(error)

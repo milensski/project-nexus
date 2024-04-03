@@ -1,0 +1,35 @@
+<div class="text-lg text-gray-400 uppercase">
+    Participants in your projects
+</div>
+
+<table *ngIf="participants" class="w-full rounded-t shadow-md text-left overflow-hidden">
+    <thead class="uppercase bg-purple-100 text-purple-600">
+        <tr>
+            <th scope="col" class="py-3 px-6">Username</th>
+            <!-- <th scope="col" class="py-3 px-6">Last Name</th> -->
+            <th scope="col" class="py-3 px-6">Email</th>
+            <th scope="col" class="py-3 px-6">Projects</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let participant of participants" class="bg-white border-b">
+            <td class="py-2 px-6 font-medium text-gray-700"><mat-chip ><img matChipAvatar src="../../../assets/img/profile.png" alt="user photo"/>{{participant.username}}</mat-chip></td>
+            <!-- <td class="py-2 px-6 font-medium text-gray-700">{{ participant.lastName }}</td> -->
+            <td class="py-2 px-6 font-medium text-gray-700">{{ participant.email }}</td>
+            <td class="py-2 px-6 font-medium text-gray-700"> {{participant.projects | join : 'title'}} </td>
+        </tr>
+        <!-- Dummy message for no results -->
+        <ng-container *ngIf="participants.length === 0">
+            <tr>
+                <td colspan="4" class="py-6 shadow-md bg-white rounded-b text-center font-medium text-xl text-gray-500">
+                    No results found.
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+
+ <!-- Dummy message for no results -->
+ <div *ngIf="!participants" class="w-full py-6 shadow-md bg-white rounded-b text-center font-medium text-xl text-gray-500">
+    <p>No results found.</p>
+</div>

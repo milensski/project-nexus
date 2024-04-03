@@ -1,0 +1,16 @@
+<div class="w-96 h-40 rounded shadow-md bg-white p-2 flex flex-col justify-start items-center">
+    <div class="text-lg text-gray-400 uppercase">
+        Project Category Breakdown
+    </div>
+    <div class="w-full space-y-4 p-4">
+        <div *ngFor="let category of projectCountByCategory" class="flex items-center justify-between">
+            <div class="w-24 text-gray-600">{{ category.category }}</div>
+            <div class="relative w-full h-4 bg-gray-200 rounded-full">
+                <div class="absolute top-0 left-0 h-full" [ngClass]="categoryColors[category.category]"
+                    [style.width.%]="(category.count / projectsCount.totalCount) * 100"></div>
+                    
+            </div>
+            <div class="text-blue-500 font-bold ml-2">{{ category.count }}</div>
+        </div>
+    </div>
+</div>

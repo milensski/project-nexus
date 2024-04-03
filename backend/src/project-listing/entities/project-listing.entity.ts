@@ -37,4 +37,5 @@ export class ProjectListing {
     @JoinTable()
     participants: User[];
 
+
 }

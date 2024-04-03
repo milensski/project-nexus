@@ -177,4 +177,52 @@ export class ProjectListingService {
     // Remove the project listing
     await this.projectListingRepository.remove(projectListing);
   }
+
+
+  async getUserProjectCountByCategory(userId: string): Promise<{ [category: string]: number }> {
+    const projects = await this.projectListingRepository.find({
+      where: { owner: { id: userId } },
+    });
+
+    const projectCountByCategory: { [category: string]: number } = {};
+
+    projects.forEach(project => {
+      if (project.category in projectCountByCategory) {
+        projectCountByCategory[project.category]++;
+      } else {
+        projectCountByCategory[project.category] = 1;
+      }
+    });
+
+    return projectCountByCategory;
+  }
+
+  async getUserProjectCount(userId: string): Promise<number> {
+    return this.projectListingRepository.count({ where: { owner: {id: userId} } });
+  }
+
+  async getAllParticipants(userId: string): Promise<User[]> {
+    // Find all projects of the user
+    const projects = await this.projectListingRepository.find({
+      where: { owner: { id: userId } },
+      relations: ['participants'],
+    });
+
+    // Extract participants from each project and add projects to participants
+    const participantsMap = new Map<string, User>();
+    projects.forEach((project) => {
+      project.participants.forEach((participant) => {
+        if (!participantsMap.has(participant.id)) {
+          // Initialize the participant with an empty projects array
+          participantsMap.set(participant.id, { ...participant, projects: [] });
+        }
+        // Add the project to the participant's projects array
+        participantsMap.get(participant.id).projects.push(project);
+      });
+    });
+
+    // Convert map values to an array and return
+    return Array.from(participantsMap.values());
+  }
+
 }

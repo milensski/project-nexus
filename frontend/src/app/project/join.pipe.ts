@@ -5,15 +5,12 @@ import { Techology } from '../types';
   name: 'join'
 })
 export class JoinPipe implements PipeTransform {
-
-  transform(value: Techology[] | null | undefined , seperator: string = ', '): string {
+  transform(value: any[] | null | undefined , property: string, separator: string = ', '): string {
     if (!value || value.length === 0) {
-      
       return '';
     }
-    const techNames = value.map(item => item.technologyName);
-    return techNames.join(seperator)
-
+    const values = value.map(item => item[property]);
+    return values.join(separator);
   }
 
 }

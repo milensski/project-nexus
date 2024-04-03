@@ -36,4 +36,6 @@ export class User {
     @ManyToMany(() => ProjectListing)
     participatedListings: ProjectListing[];
 
+    projects: ProjectListing[]
+
 }

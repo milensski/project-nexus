@@ -20,8 +20,8 @@ export class FlatCardProjectComponent {
   constructor(
     private dialog: MatDialog,
     private projectService: ProjectService,
-    private errorService: ErrorHandlingService,
-    private router: Router) { }
+    private errorService: ErrorHandlingService
+    ) { }
 
   openProjectDetails() {
     this.dialog.open(ProjectDetailsContent, {

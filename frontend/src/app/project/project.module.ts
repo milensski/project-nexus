@@ -5,7 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CardProjectComponent } from './card-project/card-project.component';
 import { ProjectDetailsComponent, ProjectDetailsContent } from './project-details/project-details.component';
 import { MatIconModule } from '@angular/material/icon';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { RouterModule } from '@angular/router';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -18,11 +18,14 @@ import { FlatCardProjectComponent } from './flat-card-project/flat-card-project.
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { InitialsPipe } from './initials.pipe';
 import { JoinPipe } from './join.pipe';
+import { TotalCountProjectCardComponent } from './total-count-project-card/total-count-project-card.component';
+import { CountUserProjectsCategoryComponent } from './count-user-projects-category/count-user-projects-category.component';
+import { ParticipantsTableComponent } from './participants-table/participants-table.component';
 
 
 
 @NgModule({
-  declarations: [CardProjectComponent, ProjectDetailsComponent, ProjectDetailsContent, CreateProjectComponent, ProjectManageComponent, FlatCardProjectComponent, InitialsPipe, JoinPipe],
+  declarations: [CardProjectComponent, ProjectDetailsComponent, ProjectDetailsContent, CreateProjectComponent, ProjectManageComponent, FlatCardProjectComponent, InitialsPipe, JoinPipe, TotalCountProjectCardComponent, CountUserProjectsCategoryComponent, ParticipantsTableComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -40,7 +43,7 @@ import { JoinPipe } from './join.pipe';
     TechkStackAutocompleteComponent,
     RouterModule
   ],
-  exports: [CardProjectComponent],
+  exports: [CardProjectComponent, TotalCountProjectCardComponent, CountUserProjectsCategoryComponent, ParticipantsTableComponent],
   providers: []
 })
 export class ProjectModule { }

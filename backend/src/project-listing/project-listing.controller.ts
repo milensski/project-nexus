@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Param, Delete, UseGuards, NotFoundException, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, UseGuards, NotFoundException, Put, Query } from '@nestjs/common';
 import { ProjectListingService } from './project-listing.service';
 import { CreateProjectListingDto } from './dto/create-project-listing.dto';
 import { UpdateProjectListingDto } from './dto/update-project-listing.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt.guard';
 import { ListUserProjectsDto } from './dto/list-user-projects.dto';
+import { User } from 'src/user/entities/user.entity';
 
 @Controller('project')
 export class ProjectListingController {
@@ -72,4 +73,24 @@ export class ProjectListingController {
   remove(@Param('id') id: string) {
     return this.projectListingService.remove(id);
   }
+
+  @Get('manage/:userId/countBy-category')
+  async getUserProjectCountByCategory(
+    @Param('userId') userId: string,
+    
+  ) {
+    return this.projectListingService.getUserProjectCountByCategory(userId);
+  }
+
+  @Get('manage/:userId/count')
+  async getUserProjectCount(@Param('userId') userId: string) {
+    const totalCount = await this.projectListingService.getUserProjectCount(userId)
+    return {totalCount};
+  }
+
+  @Get('manage/:userId/participants')
+  async getAllParticipants(@Param('userId') userId: string): Promise<User[]> {
+    return this.projectListingService.getAllParticipants(userId);
+  }
+
 }

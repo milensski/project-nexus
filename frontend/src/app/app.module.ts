@@ -31,6 +31,8 @@ import { ProjectModule } from './project/project.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { QuickActionsComponent } from './quick-actions/quick-actions.component';
+
 
 
 @NgModule({
@@ -45,6 +47,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AuthWrapperComponent,
     FooterComponent,
     ExploreComponent,
+    QuickActionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     RegisterModule,
     ProjectModule,
     NgxPaginationModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true,  }
