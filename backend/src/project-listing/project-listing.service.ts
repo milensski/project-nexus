@@ -6,7 +6,6 @@ import { ProjectListing } from './entities/project-listing.entity';
 import { In, Repository } from 'typeorm';
 import { Technology } from 'src/technology/entities/technology.entity';
 import { User } from 'src/user/entities/user.entity';
-import { log } from 'console';
 
 @Injectable()
 export class ProjectListingService {

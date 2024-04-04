@@ -32,6 +32,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { QuickActionsComponent } from './quick-actions/quick-actions.component';
+import { ProjectFilterComponent } from './project-filter/project-filter.component';
 
 
 
@@ -48,6 +49,7 @@ import { QuickActionsComponent } from './quick-actions/quick-actions.component';
     FooterComponent,
     ExploreComponent,
     QuickActionsComponent,
+    ProjectFilterComponent,
   ],
   imports: [
     BrowserModule,

@@ -27,7 +27,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.lastViewedProjectId = this.lastViewedProjectService.getLastViewedProject();
-    debugger
     
     this.authService.getUsers()
     .pipe(

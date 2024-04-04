@@ -6,6 +6,9 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TechnologyModule } from './technology/technology.module';
 import { ProjectListingModule } from './project-listing/project-listing.module';
+import { SeedController } from './seed/seed.controller';
+import { ProjectListingSeedService } from './seed/seed';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [ConfigModule.forRoot({ envFilePath: '.env' }),
@@ -23,7 +26,7 @@ import { ProjectListingModule } from './project-listing/project-listing.module';
         autoLoadEntities: true,
         synchronize: true,
       })
-    }), UserModule, AuthModule, TechnologyModule, ProjectListingModule],
+    }), UserModule, AuthModule, TechnologyModule, ProjectListingModule, SeedModule],
   controllers: [AppController],
   providers: [],
 })
