@@ -16,6 +16,7 @@ export class ExploreComponent implements OnInit {
 
   p: number = 1;
   projects: Project[] = []
+  filteredProjects: Project[] = [];
 
 
   constructor(
@@ -26,12 +27,21 @@ export class ExploreComponent implements OnInit {
   ngOnInit(): void {
     this.projectService.getProjects().subscribe((projects: Project[]) => {
       this.projects = projects;
+      this.filteredProjects = projects;
       this.isLoading = false; // Set loading state to false after data is retrieved
     });
 
     this.projectEventService.projectDeleted.subscribe(projectId => {
       this.projects = this.projects.filter(project => project.id !== projectId);
     });
+  }
+
+  applyFilter(category: string) {
+    if (category === 'All') {
+      this.filteredProjects = this.projects;
+    } else {
+      this.filteredProjects = this.projects.filter(project => project.category === category);
+    }
   }
 
 }

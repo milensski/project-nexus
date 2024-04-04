@@ -27,6 +27,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     width: 70px;  
     font-size: 24px;
   }
+  .custom-filter-chips .mat-mdc-standard-chip {
+    --mdc-chip-elevated-container-color: #d9d9d9;
+  } 
 
   .mat-mdc-standard-chip {
     --mdc-chip-elevated-container-color: #fdeb90; 

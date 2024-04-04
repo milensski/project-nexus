@@ -29,8 +29,6 @@ export class QuickActionsComponent implements OnInit {
 
   openProjectDetails() {
 
-    debugger
-
     if (this.projectId !== 'undefined') {
       this.projectService.getProject(this.projectId).subscribe(
         (response: Project) => {
