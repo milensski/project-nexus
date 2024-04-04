@@ -64,6 +64,12 @@ Application for connecting Team leaders with developers
  ```
 This will start Angular server on your localhost
 
+![Screenshot 2024-04-04 170348](https://github.com/milensski/project-nexus/assets/38993490/5e36b4a5-bcc4-40ff-9b99-1f05b5220ef1)
+![Screenshot 2024-04-04 170424](https://github.com/milensski/project-nexus/assets/38993490/364f80c0-c263-42e8-9c58-c1c6dbc0a3cf)
+![Screenshot 2024-04-04 170454](https://github.com/milensski/project-nexus/assets/38993490/4a5c89a8-c70e-4bd5-9ae9-5b33b277f546)
+![Screenshot 2024-04-04 170511](https://github.com/milensski/project-nexus/assets/38993490/4bd56a56-27c0-4a2d-8c35-53853c332d6d)
+
+
 ## Project Listings:
 Create detailed project listings with description, category, and technical stack.
 Categories include Frontend, Backend, Full-stack.
