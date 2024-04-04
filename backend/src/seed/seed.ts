@@ -15,23 +15,25 @@ export class ProjectListingSeedService {
   ) {}
 
   async seed() {
-
     const hashedPassword = await bcrypt.hash('123', 10);
 
-    // Create users
-    const user1 = await this.userRepository.save({ username: 'spacecowboy', email: 'buzz@lightyear.com', password: hashedPassword});
-    const user2 = await this.userRepository.save({ username: 'gadgetguru', email: 'inspectorgadget@who.com', password: hashedPassword });
-    const user3 = await this.userRepository.save({ username: 'codewhisperer', email: 'trinity@matrix.net', password: hashedPassword });
-    const user4 = await this.userRepository.save({ username: 'webdevwizard', email: 'wizard@webdev.com', password: hashedPassword });
-    const user5 = await this.userRepository.save({ username: 'designmaestro', email: 'maestro@design.com', password: hashedPassword });
-    const user6 = await this.userRepository.save({ username: 'thecodingninja', email: 'ninja@coding.com', password: hashedPassword });
-    const user7 = await this.userRepository.save({ username: 'mobileappmaster', email: 'master@mobileapp.com', password: hashedPassword });
-    const user8 = await this.userRepository.save({ username: 'devopsdynamo', email: 'dynamo@devops.com', password: hashedPassword });
-    const user9 = await this.userRepository.save({ username: 'datasciencewhiz', email: 'whiz@datascience.com', password: hashedPassword });
+    // Create users if they don't exist
+    const user1 = await this.findOrCreateUser('spacecowboy', 'buzz@lightyear.com', hashedPassword);
+    const user2 = await this.findOrCreateUser('gadgetguru', 'inspectorgadget@who.com', hashedPassword);
+    const user3 = await this.findOrCreateUser('codewhisperer', 'trinity@matrix.net', hashedPassword);
+    const user4 = await this.findOrCreateUser('webdevwizard', 'wizard@webdev.com', hashedPassword);
+    const user5 = await this.findOrCreateUser('designmaestro', 'maestro@design.com', hashedPassword);
+    const user6 = await this.findOrCreateUser('thecodingninja', 'ninja@coding.com', hashedPassword);
+    const user7 = await this.findOrCreateUser('mobileappmaster', 'master@mobileapp.com', hashedPassword);
+    const user8 = await this.findOrCreateUser('devopsdynamo', 'dynamo@devops.com', hashedPassword);
+    const user9 = await this.findOrCreateUser('datasciencewhiz', 'whiz@datascience.com', hashedPassword);
+    const user10 = await this.findOrCreateUser('milen_palachorov', 'mpa@project-nexus.com', hashedPassword);
 
+    // Check if projects already exist
+    const existingProjects = await this.projectListingRepository.find();
 
-    // Create projects
-    const projects = [
+    // Create projects if they don't exist
+    const projectsToCreate = [
       {
         title: 'Galactic Getaway App',
         description: 'A mobile app for booking travel to space destinations.',
@@ -88,10 +90,50 @@ export class ProjectListingSeedService {
         participants: [user5, user8, user9],
         techStackNames: ['Jenkins', 'Docker', 'Kubernetes'],
       },
+      {
+        title: 'Virtual Reality Fitness App',
+        description: 'An immersive fitness experience that combines virtual reality technology with workout routines to make exercising more engaging and enjoyable.',
+        category: 'Full-stack',
+        owner: user10,
+        participants: [user1, user3, user6],
+        techStackNames: ['React', 'Node.js', 'Unity'],
+      },
+      {
+        title: 'Community Recipe Sharing Platform',
+        description: 'A platform where users can discover, share, and collaborate on recipes with others in the community. From family favorites to experimental creations, everyone can find inspiration here.',
+        category: 'Frontend',
+        owner: user10,
+        participants: [user2, user4, user8],
+        techStackNames: ['Vue.js', 'HTML', 'CSS'],
+      },
+      {
+        title: 'Smart Gardening Assistant',
+        description: 'Take your gardening skills to the next level with a smart assistant that helps you monitor plant health, optimize watering schedules, and receive personalized tips for nurturing your garden.',
+        category: 'Backend',
+        owner: user10,
+        participants: [user5, user7, user9],
+        techStackNames: ['Python', 'Django', 'MongoDB'],
+      },
       // Add more projects here
     ];
 
-    // Save all project listings in one transaction for efficiency
-    await this.projectListingRepository.save(projects);
+    const projectPromises = projectsToCreate.map(async projectData => {
+      const existingProject = existingProjects.find(project => project.title === projectData.title);
+      if (!existingProject) {
+        const newProject = this.projectListingRepository.create(projectData);
+        await this.projectListingRepository.save(newProject);
+      }
+    });
+
+    await Promise.all(projectPromises);
+  }
+
+  async findOrCreateUser(username: string, email: string, password: string): Promise<User> {
+    const existingUser = await this.userRepository.findOne({ where: { email } });
+    if (existingUser) {
+      return existingUser;
+    } else {
+      return this.userRepository.save({ username, email, password });
+    }
   }
 }
