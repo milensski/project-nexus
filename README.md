@@ -15,7 +15,7 @@ Connecting aspiring project managers and developers.
     cd projext-nexus/
    ```
 >[!NOTE]
->Make sure to create .env file in the backend folder \
+>Make sure to create .env file in the backend folder AND on the same level to docker-compose file \
 > SAMPLE VARIABLE for .env
   ``` bash
       DB_HOST=host.docker.internal
