@@ -67,7 +67,7 @@ export class ProjectListingService {
   findProjectsByUserId(id: string) {
     
     return this.projectListingRepository.find({
-      where: { owner: { id } }, relations: ['owner', 'participants']
+      where: { owner: { id } }, relations: ['owner', 'participants', 'techStack']
     }); 
   }
 

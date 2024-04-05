@@ -70,7 +70,6 @@ ngAfterViewInit() {
 }
 
 onTechStackSelected(selectedTechStacks: any): void {
-
   this.form.get('techStackNames')?.setValue(selectedTechStacks);
 }
 

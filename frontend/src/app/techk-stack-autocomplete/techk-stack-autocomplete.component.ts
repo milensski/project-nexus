@@ -94,7 +94,7 @@ export class TechkStackAutocompleteComponent {
 
     if (index >= 0) {
       this.techStacks.splice(index, 1);
-
+      this.techStackSelected.emit(this.techStacks);
       this.announcer.announce(`Removed ${tech}`);
     }
   }
