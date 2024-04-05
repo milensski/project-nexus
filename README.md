@@ -38,7 +38,7 @@ Application for connecting Team leaders with developers
    ```bash
     cd projext-nexus/
    ```
->[!NOTE]
+>[!IMPORTANT]
 >Make sure to create .env file in the `backend` folder AND `on the same level` as docker-compose file \
 > SAMPLE VARIABLE for .env
   ``` bash
@@ -63,6 +63,10 @@ Application for connecting Team leaders with developers
     ng serve
  ```
 This will start Angular server on your localhost
+
+> [!TIP]
+> POST request to `localhost:3000/seed` will create 9 dummy users and projects participating in each other
+> it will also create a user with *username* milen_palachorov and *password* 123 for testing purposes
 
 ![Screenshot 2024-04-04 170348](https://github.com/milensski/project-nexus/assets/38993490/5e36b4a5-bcc4-40ff-9b99-1f05b5220ef1)
 ![Screenshot 2024-04-04 170424](https://github.com/milensski/project-nexus/assets/38993490/364f80c0-c263-42e8-9c58-c1c6dbc0a3cf)
