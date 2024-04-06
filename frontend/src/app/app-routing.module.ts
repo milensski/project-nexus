@@ -11,6 +11,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { ExploreComponent } from './explore/explore.component';
 import { CreateProjectComponent } from './project/create-project/create-project.component';
 import { ProjectManageComponent } from './project/project-manage/project-manage.component';
+import { IsLogged } from './auth/is-logged.guard';
 
 
 const routes: Routes = [
@@ -20,13 +21,13 @@ const routes: Routes = [
       { path: '', component: LandingPageComponent },
       { path: 'home', component: MainComponent, canActivate: [AuthGuard] },
       { path: 'explore', component: ExploreComponent },
-      {path: 'project/manage', component: ProjectManageComponent},
+      { path: 'project/manage', component: ProjectManageComponent },
       {
         path: 'project', pathMatch: 'prefix',
         children: [
-          {path: ':create', component: CreateProjectComponent},
-          {path: ':id/edit', component: CreateProjectComponent, canActivate: [AuthGuard]},
-        ] 
+          { path: ':create', component: CreateProjectComponent },
+          { path: ':id/edit', component: CreateProjectComponent, canActivate: [AuthGuard] },
+        ]
       },
     ],
     component: SideNavComponent, // SideNavComponent as parent for these child routes
@@ -34,11 +35,11 @@ const routes: Routes = [
   {
     path: 'auth', pathMatch: 'prefix',
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent }
-    ], component: AuthComponent
+      { path: 'login', component: LoginComponent, },
+      { path: 'register', component: RegisterComponent, }
+    ], component: AuthComponent, canActivate: [IsLogged]
   },
-  
+
 
   { path: '**', component: PageNotFoundComponentComponent }
 
